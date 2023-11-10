@@ -1,4 +1,7 @@
-﻿using Agora.MVVM.ViewModel;
+﻿using Agora.MVVM;
+using Agora.MVVM.Model;
+using Agora.MVVM.Services;
+using Agora.MVVM.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
