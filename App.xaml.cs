@@ -41,5 +41,7 @@ namespace Agora
             mainWindow.Show();
             base.OnStartup(e);
         }
+
+        // TODO: fix window not showing
     }
 }
