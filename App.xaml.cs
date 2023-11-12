@@ -40,8 +40,5 @@ namespace Agora
             var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
             mainWindow.Show();
             base.OnStartup(e);
-        }
-
-        // TODO: fix window not showing
     }
 }
