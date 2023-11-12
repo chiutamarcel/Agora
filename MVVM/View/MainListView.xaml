@@ -15,6 +15,25 @@
 			<ColumnDefinition Width="1*"/>
 		</Grid.ColumnDefinitions>
 
+		<Grid.RowDefinitions>
+			<RowDefinition Height="50"/>
+			<RowDefinition />
+		</Grid.RowDefinitions>
+
+		<Grid Grid.Column="1" Grid.Row="0" Name="FilterView">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+
+			<Button Content="Posts" Grid.Column="0"/>
+			<Button Content="Communities" Grid.Column="1"/>
+			<Button Content="Popular" Grid.Column="2"/>
+			<Button Content="New" Grid.Column="3"/>
+		</Grid>
+
 		<ListView 
 			Name="listView"
 			Height="auto"
@@ -23,6 +42,7 @@
 			VerticalAlignment="Stretch"
 			Width="auto"
 			Grid.Column="1"
+			Grid.Row="1"
 			ScrollViewer.VerticalScrollBarVisibility="Hidden"
 			ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
