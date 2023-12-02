@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Agora.MVVM.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,14 @@ namespace Agora
         public MainWindow()
         {
             InitializeComponent();
+            this.Show();
+
+            //load register view after MainWindow was successfuly loaded
+            if (this != null)
+            {
+                RegisterView registerView = new RegisterView();
+                registerView.Show();
+            }
         }
     }
 }
