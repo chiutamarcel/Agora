@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,15 +16,12 @@ using MaterialDesignThemes.Wpf;
 
 namespace Agora.MVVM.View
 {
-    /// <summary>
-    /// Interaction logic for RegisterView.xaml
-    /// </summary>
-    public partial class RegisterView : Window
+    public partial class LoginView : Window
     {
-        public RegisterView()
+        public LoginView()
         {
             InitializeComponent();
-        }        
+        }
         public bool IsDarkTheme { get; set; }
         private readonly PaletteHelper _paletteHelper = new PaletteHelper();
         private void themeToggle_Click(object sender, RoutedEventArgs e)
@@ -55,11 +53,15 @@ namespace Agora.MVVM.View
             base.OnMouseLeftButtonDown(e);
             this.DragMove();
         }
-
-        private void switch2loginButton_Click(object sender, RoutedEventArgs e)
+        private void loginButton_Click(object sender, RoutedEventArgs e)
         {
-            LoginView loginView = new LoginView();
-            loginView.Show();
+
+        }
+
+        private void switch2registerButton_Click(object sender, RoutedEventArgs e)
+        {
+            RegisterView registerView = new RegisterView();
+            registerView.Show();
             this.Close();
         }
     }
