@@ -1,5 +1,4 @@
-﻿using Agora.MVVM.View;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,22 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Agora
+namespace Agora.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for UserSettingsView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class UserSettingsView : Page
     {
-        public MainWindow()
+        public UserSettingsView()
         {
             InitializeComponent();
-            this.Show();
-
-            if (this != null)
-            {
-
-            }
         }
     }
 }
