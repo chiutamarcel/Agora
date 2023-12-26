@@ -46,7 +46,7 @@
                                 Click="exitButton_Click"/>
                     </StackPanel>
                 </materialDesign:PopupBox>
-                <Image Source="D:\Academie\Anul 3\Barar\Sem 1\Ap baze\proiect\Agora\MVVM\Images\Test1.png"
+                <Image Source="/MVVM/Images/AgoraLogo.png"
                        Height="130"/>
                 <TextBlock Margin="0 0 0 5"
                            HorizontalAlignment="Center"

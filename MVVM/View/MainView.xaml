@@ -6,10 +6,10 @@
 		xmlns:local="clr-namespace:Agora"
 		xmlns:views="clr-namespace:Agora.MVVM.View"
 		mc:Ignorable="d"
-		Title="MainWindow" Height="450" Width="800">
+		Title="MainWindow" Height="1080" Width="1920">
 
 	<!--<views:UserSettingsView></views:UserSettingsView>-->
-	<Grid Background="Gray">
+	<Grid Background="{StaticResource PrimaryHueDarkBrush}">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition/>
 			<ColumnDefinition MinWidth="450"/>
@@ -22,20 +22,10 @@
 		</Grid.RowDefinitions>
 
 		<!--Navbar-->
-		<Grid Grid.Column="1" Grid.Row="0" Name="FilterView">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="*"/>
-			</Grid.ColumnDefinitions>
-
-			<Button Content="Posts" Grid.Column="0"/>
-			<Button Content="Communities" Grid.Column="1"/>
-			<Button Content="Popular" Grid.Column="2"/>
-			<Button Content="New" Grid.Column="3"/>
+		<Grid Background="{StaticResource SecondaryHueMidBrush}" Grid.Row="0" Grid.ColumnSpan="3">
+			
 		</Grid>
-		
+
 		<!--MainContent-->
 		<ScrollViewer 
 			Grid.Column="1" 
@@ -43,7 +33,7 @@
 			ScrollViewer.CanContentScroll="True" 
 			VerticalScrollBarVisibility="Visible"
 			HorizontalScrollBarVisibility="Disabled">
-			<Frame Name="MainContent"  Source="UserSettingsView.xaml" Background="White"/>
+			<Frame Name="MainContent"  Source="MainListView.xaml" Background="{StaticResource MaterialDesignBackground}"/>
 		</ScrollViewer>
 
 

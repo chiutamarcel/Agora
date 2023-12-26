@@ -5,10 +5,33 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Agora.MVVM.View"
       mc:Ignorable="d" 
-      d:DesignHeight="1080" d:DesignWidth="1920"
+      d:DesignHeight="1080" d:DesignWidth="450"
       Title="MainListView">
 
-	<ListView 
+	<Grid Background="White">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="auto"/>
+		</Grid.RowDefinitions>
+
+		<!--Filters-->
+		<Grid Grid.Row="0" Name="FilterView">
+
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+
+			<Button Content="Posts" Grid.Column="0" Style="{StaticResource MaterialDesignPaperLightButton}"/>
+			<Button Content="Communities" Grid.Column="1" Style="{StaticResource MaterialDesignPaperLightButton}"/>
+			<Button Content="Popular" Grid.Column="2" Style="{StaticResource MaterialDesignPaperLightButton}"/>
+			<Button Content="New" Grid.Column="3" Style="{StaticResource MaterialDesignPaperLightButton}"/>
+
+		</Grid>
+
+		<ListView 
 		Name="listView"
 		Height="auto"
 		HorizontalAlignment="Stretch"
@@ -21,63 +44,62 @@
 		ScrollViewer.HorizontalScrollBarVisibility="Disabled"
 		ScrollViewer.CanContentScroll="False">
 
-		<ListView.ItemTemplate>
-			<DataTemplate>
-				<Grid 
-				Background="White"
-				Width="auto">
-					<Grid.RowDefinitions>
-						<RowDefinition Height="25"  />
-						<RowDefinition Height="35"  />
-						<RowDefinition Height="70" />
-						<!--<RowDefinition Height="5" />-->
-					</Grid.RowDefinitions>
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<Grid 
+					Background="White"
+					Width="auto">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="25"  />
+							<RowDefinition Height="35"  />
+							<RowDefinition Height="70" />
+							<!--<RowDefinition Height="5" />-->
+						</Grid.RowDefinitions>
 
-					<Grid Grid.Row="0" HorizontalAlignment="Stretch">
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="*"/>
-							<ColumnDefinition Width="*"/>
-							<ColumnDefinition Width="*"/>
-						</Grid.ColumnDefinitions>
+						<Grid Grid.Row="0" HorizontalAlignment="Stretch">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
 
-						<TextBlock
-						Grid.Column="0"
-						FontSize="18"
-						Text="{Binding Community, StringFormat=a/\{0\}}"
-						TextAlignment="Left"/>
+							<TextBlock
+							Grid.Column="0"
+							FontSize="18"
+							Text="{Binding Community, StringFormat=a/\{0\}}"
+							TextAlignment="Left"/>
+
+							<TextBlock 
+							Grid.Column="1"
+							Text="{Binding AuthorName, StringFormat=Posted by \{0\}}"
+							TextAlignment="Center"/>
+
+							<TextBlock 
+							Grid.Column="2"
+							Text="{Binding PostDateDiff, StringFormat=\{0\} ago}"
+							TextAlignment="Right"/>
+						</Grid>
 
 						<TextBlock 
-						Grid.Column="1"
-						Text="{Binding AuthorName, StringFormat=Posted by \{0\}}"
-						TextAlignment="Center"/>
-
+						Grid.Row="1"
+						Text="{Binding Title}"
+						FontSize="21"
+						VerticalAlignment="Center"
+						FontWeight="Bold"/>
 						<TextBlock 
-						Grid.Column="2"
-						Text="{Binding PostDateDiff, StringFormat=\{0\} ago}"
-						TextAlignment="Right"/>
+						Grid.Row="2" 
+						TextTrimming="CharacterEllipsis" 
+						TextWrapping="Wrap"
+						TextAlignment="Left"
+						FontSize="16"
+						HorizontalAlignment="Stretch"
+						Text="{Binding Content}"/>
+						<!--<Separator Grid.Row="3"/>-->
 					</Grid>
 
-					<TextBlock 
-					Grid.Row="1"
-					Text="{Binding Title}"
-					FontSize="21"
-					VerticalAlignment="Center"
-					FontWeight="Bold"/>
-					<TextBlock 
-					Grid.Row="2" 
-					TextTrimming="CharacterEllipsis" 
-					TextWrapping="Wrap"
-					TextAlignment="Left"
-					FontSize="16"
-					HorizontalAlignment="Stretch"
-					Text="{Binding Content}"/>
-					<!--<Separator Grid.Row="3"/>-->
-				</Grid>
-
-			</DataTemplate>
-		</ListView.ItemTemplate>
-	</ListView>
-
-
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+	</Grid>
 
 </Page>

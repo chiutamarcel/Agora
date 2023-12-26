@@ -9,8 +9,6 @@
 
   <ItemGroup>
     <None Remove=".gitignore" />
-    <None Remove="MVVM\Images\AgoraLogo00.png" />
-    <None Remove="MVVM\Images\AgoraLogo1.jpg" />
     <None Remove="README.md" />
   </ItemGroup>
 
@@ -18,11 +16,6 @@
     <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="MVVM\Images\AgoraLogo00.png" />
-    <Resource Include="MVVM\Images\AgoraLogo1.jpg" />
   </ItemGroup>
 
 </Project>
