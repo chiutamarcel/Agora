@@ -117,7 +117,7 @@
 				Style="{StaticResource SettingsPasswordBox}"/>
 		</Grid>
 
-		<Grid Margin="20 0"  Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+		<Grid Margin="20 0"  Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Top">
 
 			<Grid.RowDefinitions>
 				<RowDefinition/>
@@ -132,7 +132,7 @@
 			</Button>
 		</Grid>
 
-		<Grid Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="45 15">
+		<Grid Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="45 15">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition/>
 				<ColumnDefinition/>

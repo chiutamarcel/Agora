@@ -4,7 +4,7 @@
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:Agora"
-		xmlns:views="clr-namespace:Agora.MVVM.View" xmlns:control="clr-namespace:Agora.MVVM.Control"
+		xmlns:views="clr-namespace:Agora.MVVM.View"
 		mc:Ignorable="d"
 		Title="MainWindow" Height="1080" Width="1920">
 
@@ -34,7 +34,7 @@
 			</Grid.ColumnDefinitions>
 
 			<!--Logo Btn-->
-			<Button Height="auto" Style="{StaticResource MaterialDesignIconButton}">
+			<Button Height="auto" Style="{StaticResource MaterialDesignIconButton}" Click="logoBtn_Click">
 				<Image Grid.Column="0" Source="\MVVM\Images\AgoraLogo.png"/>
 			</Button>
 
@@ -59,10 +59,17 @@
 				Search
 			</Button>
 			<!--End Search Bar-->
-
-			<control:UserNavMenu>
-				
-			</control:UserNavMenu>
+			
+			<!--User Settings Button-->
+			<Button
+				Name="UserButton"
+				Grid.Column="5"
+				Height="50"
+				FontSize="22"
+				Style="{StaticResource MaterialDesignFlatDarkButton}"
+				Click="userBtn_Click">
+				<TextBlock Text="{Binding UserName}"/>
+			</Button>
 
 		</Grid>
 
@@ -73,7 +80,11 @@
 			ScrollViewer.CanContentScroll="True" 
 			VerticalScrollBarVisibility="Visible"
 			HorizontalScrollBarVisibility="Disabled">
-			<Frame Name="MainContent"  Source="MainListView.xaml" Background="{StaticResource MaterialDesignBackground}"/>
+			<Frame 
+				Name="MainContentFrame"  
+				Source="{Binding CurrentPage}" 
+				Background="{StaticResource MaterialDesignBackground}"
+				NavigationUIVisibility="Hidden"/>
 		</ScrollViewer>
 
 

@@ -8,5 +8,6 @@ namespace Agora.MVVM.ViewModel
 {
     internal class MainViewModel
     {
+        
     }
 }
