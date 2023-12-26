@@ -9,60 +9,61 @@
       Title="MainListView">
 
 	<ListView 
-			Name="listView"
-			Height="auto"
-			HorizontalAlignment="Stretch"
-			HorizontalContentAlignment="Stretch"
-			VerticalAlignment="Stretch"
-			Width="auto"
-			Grid.Column="1"
-			Grid.Row="1"
-			ScrollViewer.VerticalScrollBarVisibility="Hidden"
-			ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+		Name="listView"
+		Height="auto"
+		HorizontalAlignment="Stretch"
+		HorizontalContentAlignment="Stretch"
+		VerticalAlignment="Stretch"
+		Width="auto"
+		Grid.Column="1"
+		Grid.Row="1"
+		ScrollViewer.VerticalScrollBarVisibility="Disabled"
+		ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+		ScrollViewer.CanContentScroll="False">
 
-			<ListView.ItemTemplate>
-				<DataTemplate>
-					<Grid 
+		<ListView.ItemTemplate>
+			<DataTemplate>
+				<Grid 
 				Background="White"
 				Width="auto">
-						<Grid.RowDefinitions>
-							<RowDefinition Height="25"  />
-							<RowDefinition Height="35"  />
-							<RowDefinition Height="70" />
-							<!--<RowDefinition Height="5" />-->
-						</Grid.RowDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="25"  />
+						<RowDefinition Height="35"  />
+						<RowDefinition Height="70" />
+						<!--<RowDefinition Height="5" />-->
+					</Grid.RowDefinitions>
 
-						<Grid Grid.Row="0" HorizontalAlignment="Stretch">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="*"/>
-								<ColumnDefinition Width="*"/>
-								<ColumnDefinition Width="*"/>
-							</Grid.ColumnDefinitions>
+					<Grid Grid.Row="0" HorizontalAlignment="Stretch">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="*"/>
+						</Grid.ColumnDefinitions>
 
-							<TextBlock
+						<TextBlock
 						Grid.Column="0"
 						FontSize="18"
 						Text="{Binding Community, StringFormat=a/\{0\}}"
 						TextAlignment="Left"/>
 
-							<TextBlock 
+						<TextBlock 
 						Grid.Column="1"
 						Text="{Binding AuthorName, StringFormat=Posted by \{0\}}"
 						TextAlignment="Center"/>
 
-							<TextBlock 
+						<TextBlock 
 						Grid.Column="2"
 						Text="{Binding PostDateDiff, StringFormat=\{0\} ago}"
 						TextAlignment="Right"/>
-						</Grid>
+					</Grid>
 
-						<TextBlock 
+					<TextBlock 
 					Grid.Row="1"
 					Text="{Binding Title}"
 					FontSize="21"
 					VerticalAlignment="Center"
 					FontWeight="Bold"/>
-						<TextBlock 
+					<TextBlock 
 					Grid.Row="2" 
 					TextTrimming="CharacterEllipsis" 
 					TextWrapping="Wrap"
@@ -70,12 +71,13 @@
 					FontSize="16"
 					HorizontalAlignment="Stretch"
 					Text="{Binding Content}"/>
-						<!--<Separator Grid.Row="3"/>-->
-					</Grid>
-					
-				</DataTemplate>
-			</ListView.ItemTemplate>
+					<!--<Separator Grid.Row="3"/>-->
+				</Grid>
 
-		</ListView>
+			</DataTemplate>
+		</ListView.ItemTemplate>
+	</ListView>
+
+
 
 </Page>

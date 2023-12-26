@@ -12,7 +12,7 @@
 	<Grid Background="Gray">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition/>
-			<ColumnDefinition/>
+			<ColumnDefinition MinWidth="450"/>
 			<ColumnDefinition/>
 		</Grid.ColumnDefinitions>
 
@@ -37,7 +37,15 @@
 		</Grid>
 		
 		<!--MainContent-->
-		<Frame Name="MainContent" Grid.Column="1" Grid.Row="1" Source="UserSettingsView.xaml" Background="White"/>
+		<ScrollViewer 
+			Grid.Column="1" 
+			Grid.Row="1" 
+			ScrollViewer.CanContentScroll="True" 
+			VerticalScrollBarVisibility="Visible"
+			HorizontalScrollBarVisibility="Disabled">
+			<Frame Name="MainContent"  Source="UserSettingsView.xaml" Background="White"/>
+		</ScrollViewer>
+
 
 	</Grid>
 
