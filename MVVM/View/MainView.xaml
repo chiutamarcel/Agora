@@ -4,26 +4,66 @@
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:Agora"
-		xmlns:views="clr-namespace:Agora.MVVM.View"
+		xmlns:views="clr-namespace:Agora.MVVM.View" xmlns:control="clr-namespace:Agora.MVVM.Control"
 		mc:Ignorable="d"
 		Title="MainWindow" Height="1080" Width="1920">
 
 	<!--<views:UserSettingsView></views:UserSettingsView>-->
 	<Grid Background="{StaticResource PrimaryHueDarkBrush}">
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition/>
-			<ColumnDefinition MinWidth="450"/>
-			<ColumnDefinition/>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition MinWidth="450" Width="2*"/>
+			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 
 		<Grid.RowDefinitions>
-			<RowDefinition Height="50"/>
+			<RowDefinition Height="60"/>
 			<RowDefinition />
 		</Grid.RowDefinitions>
 
 		<!--Navbar-->
 		<Grid Background="{StaticResource SecondaryHueMidBrush}" Grid.Row="0" Grid.ColumnSpan="3">
+
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="60"/>
+				<ColumnDefinition Width="*"/> <!--Spacer-->
+				<ColumnDefinition Width="450"/>
+				<ColumnDefinition Width="150"/>
+				<ColumnDefinition Width="*"/> <!--Spacer-->
+				<ColumnDefinition Width="auto"/>
+			</Grid.ColumnDefinitions>
+
+			<!--Logo Btn-->
+			<Button Height="auto" Style="{StaticResource MaterialDesignIconButton}">
+				<Image Grid.Column="0" Source="\MVVM\Images\AgoraLogo.png"/>
+			</Button>
+
+			<!--Search Bar-->
+			<TextBox 
+				Grid.Column="2" 
+				Width="auto"
+				Margin="0 5"
+				HorizontalAlignment="Stretch" 
+				VerticalAlignment="Stretch"
+				Background="White"
+				Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
 			
+			<Button
+				Grid.Column="3"
+				Height="50"
+				Width="auto"
+				Margin="5 0"
+				HorizontalAlignment="Stretch"
+				VerticalAlignment="Stretch"
+				Style="{StaticResource MaterialDesignPaperButton}">
+				Search
+			</Button>
+			<!--End Search Bar-->
+
+			<control:UserNavMenu>
+				
+			</control:UserNavMenu>
+
 		</Grid>
 
 		<!--MainContent-->
