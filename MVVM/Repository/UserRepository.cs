@@ -105,7 +105,7 @@ namespace Agora.MVVM.Services
 
             connection.Close();
 
-            return userID;
+            return 0;
         }
 
     }

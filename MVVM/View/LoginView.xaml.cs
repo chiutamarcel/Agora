@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MaterialDesignThemes.Wpf;
+using Agora.MVVM.Services;
 
 namespace Agora.MVVM.View
 {
@@ -54,8 +55,28 @@ namespace Agora.MVVM.View
             this.DragMove();
         }
         private void loginButton_Click(object sender, RoutedEventArgs e)
-        {
+        {           
+            UserRepository userRepository = new UserRepository();
+            if(userRepository.LoginUser(Username.Text, Password.Password) == 0)
+            {
+                // change from the current MainWindow the value isLoggedIn to true
+                // and change the value of the current MainWindow's username to the username that was just logged in
+                // then close this window
 
+                if (Application.Current.MainWindow is MainWindow mainWindow)
+                {
+                    mainWindow.isLoggedin = true;
+                    mainWindow.UserName = Username.Text;
+                    mainWindow.UserButton.Visibility = Visibility.Visible;
+                    mainWindow.LogInButton.Visibility = Visibility.Hidden;
+                }
+
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Invalid username or password");
+            }
         }
 
         private void switch2registerButton_Click(object sender, RoutedEventArgs e)
@@ -63,6 +84,11 @@ namespace Agora.MVVM.View
             RegisterView registerView = new RegisterView();
             registerView.Show();
             this.Close();
+        }
+
+        private void Username_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

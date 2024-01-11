@@ -6,7 +6,7 @@
 		xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 		xmlns:local="clr-namespace:Agora.MVVM.View"
 		mc:Ignorable="d"
-		Title="RegisterView" Height="760" Width="450" 
+		Title="LoginView" Height="760" Width="450" 
 		TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{x:Null}"
         AllowsTransparency="True"
@@ -37,7 +37,7 @@
                                           IsChecked="{Binding IsDarkTheme}"
                                           Click="themeToggle_Click"/>
                         </StackPanel>
-                        <Button ToolTip="Having Trouble Registering?"
+                        <Button ToolTip="Having Trouble Logging In?"
                                 Margin="0 8 0 0"
                                 Content="Help Me"/>
                         <Button x:Name="exitButton"
@@ -59,13 +59,13 @@
                            Text="Log in to Agora"
                            Margin="0 15 0 5"/>
                 <TextBox Margin="0 90 0 5"
-                           x:Name="Email"
+                           x:Name="Username"
                            Width="300"
                            FontSize="15"
-                           materialDesign:HintAssist.Hint="Email"
+                           materialDesign:HintAssist.Hint="Username"
                            BorderThickness="2"
                            BorderBrush="{DynamicResource MaterialDesignDivider}"
-                           Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                           Style="{StaticResource MaterialDesignOutlinedTextBox}" TextChanged="Username_TextChanged"/>
                 <PasswordBox Margin="0 15 0 5"
                              x:Name="Password"
                              Width="300"

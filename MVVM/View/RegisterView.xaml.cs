@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Agora.MVVM.Model;
+using Agora.MVVM.Services;
 using MaterialDesignThemes.Wpf;
 
 namespace Agora.MVVM.View
@@ -42,6 +44,44 @@ namespace Agora.MVVM.View
 
         private void registerButton_Click(object sender, RoutedEventArgs e)
         {
+            if(Password.Password != PasswordConfirm.Password)
+            {
+                MessageBox.Show("Passwords do not match!");
+                return;
+            }
+            if(Password.Password.Length < 8)
+            {
+                MessageBox.Show("Password must be at least 8 characters long!");
+                return;
+            }
+            if (Username.Text.Length < 4)
+            {
+                MessageBox.Show("Username must be at least 4 characters long!");
+                return;
+            }
+            if (Email.Text.Length < 4)
+            {
+                MessageBox.Show("Email must be at least 4 characters long!");
+                return;
+            }
+            UserRepository userRepository = new UserRepository();
+            User user = new User(0, Username.Text, Password.Password, Email.Text, DateOnly.FromDateTime(DateTime.Now)); 
+
+            if (userRepository.RegisterUser(user) == 0)
+            {
+                MessageBox.Show("Username already exists!");
+                return;
+            }
+            else
+            {
+                MessageBox.Show("Registration successful!");
+                if (Application.Current.MainWindow is MainWindow mainWindow)
+                {
+                    mainWindow.isLoggedin = true;
+                    mainWindow.UserName = Username.Text;
+                }
+                this.Close();
+            }
         }
         private void exitButton_Click(object sender, RoutedEventArgs e)
         {
