@@ -42,7 +42,7 @@
                                 Content="Help Me"/>
                         <Button x:Name="exitButton"
                                 ToolTip="Close Application"
-                                Content="Exit Application"
+                                Content="Close"
                                 Click="exitButton_Click"/>
                     </StackPanel>
                 </materialDesign:PopupBox>

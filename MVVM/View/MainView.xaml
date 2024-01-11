@@ -62,16 +62,27 @@
 			
 			<!--User Settings Button-->
 			<Button
-				Name="UserButton"
+				Name="UserButton"               
 				Grid.Column="5"
 				Height="50"
 				FontSize="22"
 				Style="{StaticResource MaterialDesignFlatDarkButton}"
 				Click="userBtn_Click">
-				<TextBlock Text="{Binding UserName}"/>
-			</Button>
+                <TextBlock Text="{Binding UserName}"/>
+            </Button>
+            <!--LogIn button-->
+            <Button
+                Name="LogInButton"
+                Grid.Column="5"
+                Height="50"
+                FontSize="22"
+                Style="{StaticResource MaterialDesignFlatDarkButton}"
+                Click="loginBtn_Click">
+                <TextBlock Text="Login" />
+            </Button>
 
-		</Grid>
+
+        </Grid>
 
 		<!--MainContent-->
 		<ScrollViewer 

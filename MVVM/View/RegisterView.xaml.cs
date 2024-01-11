@@ -15,9 +15,6 @@ using MaterialDesignThemes.Wpf;
 
 namespace Agora.MVVM.View
 {
-    /// <summary>
-    /// Interaction logic for RegisterView.xaml
-    /// </summary>
     public partial class RegisterView : Window
     {
         public RegisterView()
@@ -48,7 +45,7 @@ namespace Agora.MVVM.View
         }
         private void exitButton_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            this.Close();
         }
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {

@@ -59,6 +59,8 @@ namespace Agora
             }
         }
 
+        public bool isLoggedin = false;
+
         public MainWindow()
         {
             CurrentPage = "MainListView.xaml";
@@ -69,7 +71,12 @@ namespace Agora
 
             if (this != null)
             {
-                MainContentFrame.DataContext = this;
+                if(isLoggedin == false)
+                {
+                    UserButton.Visibility = Visibility.Hidden;
+                    LogInButton.Visibility = Visibility.Visible;
+                }
+                MainContentFrame.DataContext = this;                
                 UserButton.DataContext = this;
             }
         }
@@ -82,8 +89,15 @@ namespace Agora
         }
 
         private void userBtn_Click(object sender, RoutedEventArgs e)
-        {
+        {            
             CurrentPage = "UserSettingsView.xaml";
         }
+
+        private void loginBtn_Click(object sender, RoutedEventArgs e)
+        {
+            LoginView loginView = new LoginView();
+            loginView.Show();
+        }
+
     }
 }

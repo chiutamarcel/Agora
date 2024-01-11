@@ -46,7 +46,7 @@ namespace Agora.MVVM.View
         }
         private void exitButton_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            this.Close();
         }
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
