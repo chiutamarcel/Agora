@@ -25,6 +25,7 @@ namespace Agora.MVVM.View
         {
             InitializeComponent();
             PostsRepository repo = new PostsRepository();
+            repo.Seed();
             listView.ItemsSource = repo.GetAllPosts();
         }
     }

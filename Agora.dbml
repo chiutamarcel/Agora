@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="AgoraDB" Class="AgoraDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=BLANK\SQLEXPRESS;Initial Catalog=AgoraDB;Integrated Security=True;Trust Server Certificate=True" SettingsObjectName="Agora.Properties.Settings" SettingsPropertyName="AgoraDBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Communities" Member="Communities">
+    <Type Name="Community">
+      <Column Name="CommunityID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CommunityName" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="CommunityAdmin" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Community_CommunitiesUser" Member="CommunitiesUsers" ThisKey="CommunityID" OtherKey="CommunityID" Type="CommunitiesUser" />
+      <Association Name="Community_Post" Member="Posts" ThisKey="CommunityID" OtherKey="CommunityID" Type="Post" />
+      <Association Name="User_Community" Member="User" ThisKey="CommunityAdmin" OtherKey="UserID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="UserPassword" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="UserEmail" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Birthdate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="User_Community" Member="Communities" ThisKey="UserID" OtherKey="CommunityAdmin" Type="Community" />
+      <Association Name="User_CommunitiesUser" Member="CommunitiesUsers" ThisKey="UserID" OtherKey="UserID" Type="CommunitiesUser" />
+      <Association Name="User_Post" Member="Posts" ThisKey="UserID" OtherKey="AuthorID" Type="Post" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CommunitiesUsers" Member="CommunitiesUsers">
+    <Type Name="CommunitiesUser">
+      <Column Name="CommunityID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Community_CommunitiesUser" Member="Community" ThisKey="CommunityID" OtherKey="CommunityID" Type="Community" IsForeignKey="true" />
+      <Association Name="User_CommunitiesUser" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Posts" Member="Posts">
+    <Type Name="Post">
+      <Column Name="PostID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AuthorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CommunityID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PostTitle" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PostText" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PostDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="User_Post" Member="User" ThisKey="AuthorID" OtherKey="UserID" Type="User" IsForeignKey="true" />
+      <Association Name="Community_Post" Member="Community" ThisKey="CommunityID" OtherKey="CommunityID" Type="Community" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

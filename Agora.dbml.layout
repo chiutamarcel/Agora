@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Agora">
+  <DataContextMoniker Name="/AgoraDataContext" />
+  <nestedChildShapes>
+    <classShape Id="3582f2b7-1de1-46b9-ab59-c10d4620c4c9" absoluteBounds="3.5, 3.625, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/AgoraDataContext/Community" />
+      <nestedChildShapes>
+        <elementListCompartment Id="78800a1b-192b-4e90-86a5-828d8e1b41d8" absoluteBounds="3.515, 4.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="55162db8-c095-4e71-828f-61d4d698d164" absoluteBounds="0.75, 3.5, 2, 1.7708968098958344">
+      <DataClassMoniker Name="/AgoraDataContext/User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3dbe70d3-bd88-4018-851b-0559294841ec" absoluteBounds="0.765, 3.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="44ee2fce-4395-4db6-a2f1-fba59cc589d2" absoluteBounds="6.25, 0.75, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/AgoraDataContext/CommunitiesUser" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a4c0585f-817b-43ec-a1cf-a94ad6ceb609" absoluteBounds="6.265, 1.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0bc88074-d4dd-4092-96f6-9f72ea0cba64" absoluteBounds="6.25, 3.375, 2, 1.9631982421874996">
+      <DataClassMoniker Name="/AgoraDataContext/Post" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8070948d-ca05-4655-a2f9-d2823053d3c0" absoluteBounds="6.265, 3.835, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 4.31814697265625); (3.5 : 4.31814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AgoraDataContext/User/User_Community" />
+      <nodes>
+        <classShapeMoniker Id="55162db8-c095-4e71-828f-61d4d698d164" />
+        <classShapeMoniker Id="3582f2b7-1de1-46b9-ab59-c10d4620c4c9" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.5 : 3.625); (4.5 : 1.34699625651042); (6.25 : 1.34699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AgoraDataContext/Community/Community_CommunitiesUser" />
+      <nodes>
+        <classShapeMoniker Id="3582f2b7-1de1-46b9-ab59-c10d4620c4c9" />
+        <classShapeMoniker Id="44ee2fce-4395-4db6-a2f1-fba59cc589d2" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 3.5); (1.75 : 1.67674688476563); (4.41666666666667 : 1.67674688476563 : JumpStart); (4.58333333333333 : 1.67674688476563 : JumpEnd); (6.25 : 1.67674688476563)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AgoraDataContext/User/User_CommunitiesUser" />
+      <nodes>
+        <classShapeMoniker Id="55162db8-c095-4e71-828f-61d4d698d164" />
+        <classShapeMoniker Id="44ee2fce-4395-4db6-a2f1-fba59cc589d2" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 5.17234537760417); (6.25 : 5.17234537760417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AgoraDataContext/User/User_Post" />
+      <nodes>
+        <classShapeMoniker Id="55162db8-c095-4e71-828f-61d4d698d164" />
+        <classShapeMoniker Id="0bc88074-d4dd-4092-96f6-9f72ea0cba64" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 4.31814697265625); (6.25 : 4.31814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AgoraDataContext/Community/Community_Post" />
+      <nodes>
+        <classShapeMoniker Id="3582f2b7-1de1-46b9-ab59-c10d4620c4c9" />
+        <classShapeMoniker Id="0bc88074-d4dd-4092-96f6-9f72ea0cba64" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

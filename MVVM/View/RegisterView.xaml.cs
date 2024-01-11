@@ -11,7 +11,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Agora.MVVM.Model;
 using Agora.MVVM.Services;
 using MaterialDesignThemes.Wpf;
 
@@ -65,15 +64,11 @@ namespace Agora.MVVM.View
                 return;
             }
             UserRepository userRepository = new UserRepository();
-            User user = new User(0, Username.Text, Password.Password, Email.Text, DateTime.Now); 
+            User user = new User(Username.Text, Password.Password, Email.Text, DateTime.Now);
 
-            if (userRepository.RegisterUser(user) == 0)
+            try
             {
-                MessageBox.Show("Username already exists!");
-                return;
-            }
-            else
-            {
+                userRepository.RegisterUser(user);
                 MessageBox.Show("Registration successful!");
                 if (Application.Current.MainWindow is MainWindow mainWindow)
                 {
@@ -81,6 +76,11 @@ namespace Agora.MVVM.View
                     mainWindow.UserName = Username.Text;
                 }
                 this.Close();
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Error while registering!");
+                MessageBox.Show(exc.Message);
             }
         }
         private void exitButton_Click(object sender, RoutedEventArgs e)

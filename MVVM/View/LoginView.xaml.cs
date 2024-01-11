@@ -57,12 +57,19 @@ namespace Agora.MVVM.View
         private void loginButton_Click(object sender, RoutedEventArgs e)
         {           
             UserRepository userRepository = new UserRepository();
-            if(userRepository.LoginUser(Username.Text, Password.Password) == 0)
+            try
             {
+                int? userId = userRepository.LoginUser(Username.Text, Password.Password);
+
+                if (userId == 0)
+                {
+                    MessageBox.Show("Invalid Login.");
+                    return;
+                }
+
                 // change from the current MainWindow the value isLoggedIn to true
                 // and change the value of the current MainWindow's username to the username that was just logged in
                 // then close this window
-
                 if (Application.Current.MainWindow is MainWindow mainWindow)
                 {
                     mainWindow.isLoggedin = true;
@@ -73,9 +80,9 @@ namespace Agora.MVVM.View
 
                 this.Close();
             }
-            else
+            catch (Exception exc)
             {
-                MessageBox.Show("Invalid username or password");
+                MessageBox.Show("Caught exception in LoginUser: \n" + exc.Message);
             }
         }
 
