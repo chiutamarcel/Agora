@@ -59,26 +59,43 @@ namespace Agora
             }
         }
 
-        public bool isLoggedin = false;
+        private bool isLoggedin;
+
+        public bool IsLoggedin
+        {
+            get { return isLoggedin; }
+            set
+            {
+                isLoggedin = value;
+                if (isLoggedin == true)
+                {
+                    UserButton.Visibility = Visibility.Visible;
+                    LogInButton.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    UserButton.Visibility = Visibility.Hidden;
+                    LogInButton.Visibility = Visibility.Visible;
+                }
+                OnPropertyChanged();
+            }
+        }
 
         public MainWindow()
         {
+            isLoggedin = false;
+
             CurrentPage = "MainListView.xaml";
             UserName = "Bababui";
 
             InitializeComponent();
             this.Show();
 
-            if (this != null)
-            {
-                if(isLoggedin == false)
-                {
-                    UserButton.Visibility = Visibility.Hidden;
-                    LogInButton.Visibility = Visibility.Visible;
-                }
-                MainContentFrame.DataContext = this;                
-                UserButton.DataContext = this;
-            }
+            UserButton.Visibility = Visibility.Hidden;
+            LogInButton.Visibility = Visibility.Visible;
+
+            MainContentFrame.DataContext = this;
+            UserButton.DataContext = this;
         }
 
 

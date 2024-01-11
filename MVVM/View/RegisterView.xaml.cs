@@ -77,7 +77,7 @@ namespace Agora.MVVM.View
                 MessageBox.Show("Registration successful!");
                 if (Application.Current.MainWindow is MainWindow mainWindow)
                 {
-                    mainWindow.isLoggedin = true;
+                    mainWindow.IsLoggedin= true;
                     mainWindow.UserName = Username.Text;
                 }
                 this.Close();
