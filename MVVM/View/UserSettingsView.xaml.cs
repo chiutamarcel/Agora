@@ -24,5 +24,18 @@ namespace Agora.MVVM.View
         {
             InitializeComponent();
         }
+
+        private void logoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            mainWindow.IsLoggedin = false;
+            mainWindow.CurrentPage = "MainListView.xaml";
+        }
+
+        private void deleteAccountButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
+
 }
