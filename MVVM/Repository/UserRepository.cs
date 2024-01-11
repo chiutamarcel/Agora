@@ -45,7 +45,7 @@ namespace Agora.MVVM.Services
                     reader.GetString(1),
                     reader.GetString(2),
                     reader.GetString(3),
-                    DateOnly.FromDateTime(reader.GetDateTime(4))
+                    reader.GetDateTime(4)
                 );
 
                 users.Add(user);
@@ -71,7 +71,7 @@ namespace Agora.MVVM.Services
             cmd.Parameters.AddWithValue("@Username", user.Username);
             cmd.Parameters.AddWithValue("@UserPassword", user.Password);
             cmd.Parameters.AddWithValue("@UserEmail", user.Email);
-            cmd.Parameters.AddWithValue("@Birthdate", user.Birthdate.ToDateTime(TimeOnly.MinValue));
+            cmd.Parameters.AddWithValue("@Birthdate", user.Birthdate);
 
             int nrOfRows = cmd.ExecuteNonQuery();
             if (nrOfRows == 0) throw new Exception("Register failed!");

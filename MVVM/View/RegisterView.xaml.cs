@@ -65,7 +65,7 @@ namespace Agora.MVVM.View
                 return;
             }
             UserRepository userRepository = new UserRepository();
-            User user = new User(0, Username.Text, Password.Password, Email.Text, DateOnly.FromDateTime(DateTime.Now)); 
+            User user = new User(0, Username.Text, Password.Password, Email.Text, DateTime.Now); 
 
             if (userRepository.RegisterUser(user) == 0)
             {

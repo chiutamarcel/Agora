@@ -6,17 +6,26 @@ using System.Threading.Tasks;
 
 namespace Agora.MVVM.Model
 {
-    internal class Post : Entity, IPost
+    internal class Post
     {
-        public PostType Type { get; set; }
+        //public PostType Type { get; set; }
+        public int AuthorID { get; set; }
+        public int CommunityID { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
         public DateTime Date { get; set; }
-        public int AuthorID { get; set; }
-        public int CategoryID { get; set; }
 
-        public Post(int id) : base(id)
+        public Post()
         {
+        }
+
+        public Post(int authorID, int communityID, string title, string content, DateTime date)
+        {
+            Title = title;
+            AuthorID = authorID;
+            CommunityID = communityID;
+            Content = content;
+            Date = date;
         }
 
         public void Save()

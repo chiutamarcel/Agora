@@ -12,9 +12,9 @@ namespace Agora.MVVM.Model
         public string Username { get; }
         public string Password {  get; }
         public string Email {  get; }
-        public DateOnly Birthdate {  get; }
+        public DateTime Birthdate { get; }
 
-        public User(int userID, string username, string password, string email, DateOnly birthdate)
+        public User(int userID, string username, string password, string email, DateTime birthdate)
         {
             UserID = userID;
             Username = username;

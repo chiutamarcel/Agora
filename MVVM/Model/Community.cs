@@ -7,25 +7,23 @@ using System.Threading.Tasks;
 
 namespace Agora.MVVM.Model
 {
-    internal class Community : Entity, ICommunity
+    internal class Community
     {
-        public Community(int id) : base(id)
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public int OwnerID { get; set; }
+        public int CategoryID { get; set; }
+
+        public Community()
         {
         }
 
-        public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Description { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int OwnerID { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int CategoryID { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public void Delete()
+        public Community(string name, string description, int ownerID, int categoryID)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Save()
-        {
-            throw new NotImplementedException();
+            Name = name;
+            Description = description;
+            OwnerID = ownerID;
+            CategoryID = categoryID;
         }
     }
 }
