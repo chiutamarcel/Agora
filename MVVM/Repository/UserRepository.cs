@@ -42,5 +42,13 @@ namespace Agora.MVVM.Services
             return id;
         }
 
+        public void DeleteUser(int userId)
+        {
+            var user = (from usr in dataContext.Users where usr.UserID == userId select usr).First();
+
+            dataContext.Users.DeleteOnSubmit(user);
+            dataContext.SubmitChanges();
+        }
+
     }
 }

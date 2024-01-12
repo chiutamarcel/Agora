@@ -28,12 +28,7 @@ namespace Agora
             PostsRepository repo = new PostsRepository();
             repo.Seed();
 
-            services.AddSingleton<MainWindow>(provider => new MainWindow
-            {
-                DataContext = provider.GetRequiredService<MainViewModel>()
-            });
-
-            services.AddSingleton<MainViewModel>();
+            services.AddSingleton<MainWindow>();
 
             _serviceProvider = services.BuildServiceProvider();
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Agora.MVVM.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,7 +35,10 @@ namespace Agora.MVVM.View
 
         private void deleteAccountButton_Click(object sender, RoutedEventArgs e)
         {
-
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            UserRepository userRepository = new UserRepository();
+            userRepository.DeleteUser(mainWindow.UserID);
+            logoutButton_Click(sender, e);
         }
     }
 

@@ -125,7 +125,6 @@
     <Compile Include="MVVM\Repository\PostsRepository.cs" />
     <Compile Include="MVVM\Repository\UserRepository.cs" />
     <Compile Include="MVVM\ViewModel\MainListVM.cs" />
-    <Compile Include="MVVM\ViewModel\MainViewModel.cs" />
     <Compile Include="MVVM\View\Home.cs" />
     <Compile Include="MVVM\View\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>

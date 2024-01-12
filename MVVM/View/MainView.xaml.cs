@@ -81,6 +81,8 @@ namespace Agora
             }
         }
 
+        public int UserID { get; set; }
+
         public MainWindow()
         {
             isLoggedin = false;
