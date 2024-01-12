@@ -1,4 +1,5 @@
 ﻿using Agora.MVVM;
+using Agora.MVVM.Repository;
 using Agora.MVVM.Services;
 using Agora.MVVM.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +24,9 @@ namespace Agora
         public App()
         {
             IServiceCollection services = new ServiceCollection();
+
+            PostsRepository repo = new PostsRepository();
+            repo.Seed();
 
             services.AddSingleton<MainWindow>(provider => new MainWindow
             {

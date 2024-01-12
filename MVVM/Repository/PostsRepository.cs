@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Agora.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -18,9 +19,21 @@ namespace Agora.MVVM.Repository
             dataContext = new AgoraDataContext();
         }
 
-        public List<Post> GetAllPosts()
+        public List<MainListVM> GetPostsList()
         {
-            List<Post> posts = (from p in dataContext.Posts select p).ToList();
+            List<MainListVM> posts =    (from post in dataContext.Posts
+                                        join user in dataContext.Users
+                                        on post.AuthorID equals user.UserID
+                                        join community in dataContext.Communities
+                                        on post.CommunityID equals community.CommunityID
+                                        select new MainListVM
+                                        (
+                                            post.PostTitle,
+                                            user.Username,
+                                            community.CommunityName,
+                                            post.PostText,
+                                            post.PostDate.ToString()
+                                        )).ToList();
 
             return posts;
         }
