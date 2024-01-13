@@ -27,14 +27,20 @@ namespace Agora
 
         private void UpVote_Click(object sender, RoutedEventArgs e)
         {
-            UpVote.IsChecked = true; 
-            DownVote.IsChecked = false;
+            if (UpVote.IsChecked == true)
+            {
+                DownVote.IsChecked = false;
+            }
+
         }
 
         private void DownVote_Click(object sender, RoutedEventArgs e)
         {
-            UpVote.IsChecked = false;
-            DownVote.IsChecked = true;
+            if (DownVote.IsChecked == true)
+            {
+                UpVote.IsChecked = false;
+            }
+
         }
     }
 }

@@ -48,8 +48,8 @@
 
 		</Grid>
 
-		<ListView
-			Name="listView"
+		<ItemsControl
+			Name="mainList"
 			Grid.Row="1"
 			Grid.Column="1"
 			Width="auto"
@@ -60,12 +60,18 @@
 			ScrollViewer.CanContentScroll="False"
 			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
 			ScrollViewer.VerticalScrollBarVisibility="Disabled">
-			<ListView.ItemTemplate>
+			<!--<ListView.ItemContainerStyle>
+				<Style TargetType="{x:Type ListViewItem}">
+					<Setter Property="Focusable" Value="False" />
+					<Setter Property="FocusVisualStyle" Value="{x:Null}" />
+				</Style>
+			</ListView.ItemContainerStyle>-->
+			<ItemsControl.ItemTemplate>
 				<DataTemplate x:Name="MainListCard">
 					<agora:MainListCard />
 				</DataTemplate>
-			</ListView.ItemTemplate>
-		</ListView>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
 	</Grid>
 
 </Page>
