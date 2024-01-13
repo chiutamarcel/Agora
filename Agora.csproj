@@ -100,6 +100,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MVVM\View\AddPostView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\EditPostView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Compile Include="Seeder.cs" />
     <Page Include="MVVM\View\LoginView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -125,6 +133,12 @@
   <ItemGroup>
     <Compile Include="MVVM\Repository\PostsRepository.cs" />
     <Compile Include="MVVM\Repository\UserRepository.cs" />
+    <Compile Include="MVVM\View\AddPostView.xaml.cs">
+      <DependentUpon>AddPostView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\EditPostView.xaml.cs">
+      <DependentUpon>EditPostView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\ViewModel\MainListVM.cs" />
     <Compile Include="MVVM\View\Home.cs" />
     <Compile Include="MVVM\View\LoginView.xaml.cs">
@@ -178,10 +192,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="MVVM\Images\AgoraLogo.png" />
-    <Resource Include="MVVM\Images\login_register_logo.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="MVVM\Images\addPost.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets" Condition="Exists('packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets')" />

@@ -118,5 +118,9 @@ namespace Agora
             loginView.Show();
         }
 
+        private void addPostBtn_Click(object sender, RoutedEventArgs e)
+        {
+            CurrentPage = "AddPostView.xaml";
+        }
     }
 }

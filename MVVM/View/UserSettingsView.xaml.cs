@@ -43,6 +43,16 @@ namespace Agora.MVVM.View
             userRepository.DeleteUser(mainWindow.UserID);
             logoutButton_Click(sender, e);
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 
 }
