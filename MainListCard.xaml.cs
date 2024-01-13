@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Agora.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,19 +28,34 @@ namespace Agora
 
         private void UpVote_Click(object sender, RoutedEventArgs e)
         {
+            MainListVM source = DataContext as MainListVM;
+
             if (UpVote.IsChecked == true)
             {
+                source.VoteCount++;
                 DownVote.IsChecked = false;
+            } 
+            else
+            {
+                source.VoteCount--;
             }
+            
 
         }
 
         private void DownVote_Click(object sender, RoutedEventArgs e)
         {
+            MainListVM source = DataContext as MainListVM;
             if (DownVote.IsChecked == true)
             {
+                source.VoteCount--;
                 UpVote.IsChecked = false;
+            } else
+            {
+                source.VoteCount++;
             }
+            
+
 
         }
     }

@@ -145,12 +145,6 @@ namespace Agora
 			OnCreated();
 		}
 
-        public Community(string communityName, int? communityAdmin) : this()
-        {
-            _CommunityName = communityName;
-            _CommunityAdmin = communityAdmin;
-        }
-
         [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CommunityID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int CommunityID
 		{
@@ -365,14 +359,6 @@ namespace Agora
 			this._Posts = new EntitySet<Post>(new Action<Post>(this.attach_Posts), new Action<Post>(this.detach_Posts));
 			OnCreated();
 		}
-
-        public User(string username, string userPassword, string userEmail, DateTime birthdate) : this()
-        {
-            _Username = username;
-            _UserPassword = userPassword;
-            _UserEmail = userEmail;
-            _Birthdate = birthdate;
-        }
 
         [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int UserID
@@ -601,12 +587,6 @@ namespace Agora
 			OnCreated();
 		}
 
-        public CommunitiesUser(int communityID, int userID) : this()
-        {
-            _CommunityID = communityID;
-            _UserID = userID;
-        }
-
         [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CommunityID", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int CommunityID
 		{
@@ -762,9 +742,11 @@ namespace Agora
 		
 		private System.Nullable<System.DateTime> _PostDate;
 		
-		private EntityRef<User> _User;
+		private int _VoteCount;
 		
 		private EntityRef<Community> _Community;
+		
+		private EntityRef<User> _User;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -782,23 +764,16 @@ namespace Agora
     partial void OnPostTextChanged();
     partial void OnPostDateChanging(System.Nullable<System.DateTime> value);
     partial void OnPostDateChanged();
+    partial void OnVoteCountChanging(int value);
+    partial void OnVoteCountChanged();
     #endregion
 		
 		public Post()
 		{
-			this._User = default(EntityRef<User>);
 			this._Community = default(EntityRef<Community>);
+			this._User = default(EntityRef<User>);
 			OnCreated();
 		}
-
-        public Post(int? authorID, int? communityID, string postTitle, string postText, DateTime? postDate) : this()
-        {
-            _AuthorID = authorID;
-            _CommunityID = communityID;
-            _PostTitle = postTitle;
-            _PostText = postText;
-            _PostDate = postDate;
-        }
 
         [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PostID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int PostID
@@ -928,36 +903,22 @@ namespace Agora
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Post", Storage="_User", ThisKey="AuthorID", OtherKey="UserID", IsForeignKey=true)]
-		public User User
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VoteCount", DbType="Int NOT NULL")]
+		public int VoteCount
 		{
 			get
 			{
-				return this._User.Entity;
+				return this._VoteCount;
 			}
 			set
 			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
+				if ((this._VoteCount != value))
 				{
+					this.OnVoteCountChanging(value);
 					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.Posts.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.Posts.Add(this);
-						this._AuthorID = value.UserID;
-					}
-					else
-					{
-						this._AuthorID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("User");
+					this._VoteCount = value;
+					this.SendPropertyChanged("VoteCount");
+					this.OnVoteCountChanged();
 				}
 			}
 		}
@@ -992,6 +953,40 @@ namespace Agora
 						this._CommunityID = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Community");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Post", Storage="_User", ThisKey="AuthorID", OtherKey="UserID", IsForeignKey=true, DeleteRule="SET NULL")]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Posts.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Posts.Add(this);
+						this._AuthorID = value.UserID;
+					}
+					else
+					{
+						this._AuthorID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("User");
 				}
 			}
 		}

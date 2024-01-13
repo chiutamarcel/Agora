@@ -38,8 +38,9 @@
       <Column Name="PostTitle" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="PostText" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="PostDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Association Name="User_Post" Member="User" ThisKey="AuthorID" OtherKey="UserID" Type="User" IsForeignKey="true" />
+      <Column Name="VoteCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Community_Post" Member="Community" ThisKey="CommunityID" OtherKey="CommunityID" Type="Community" IsForeignKey="true" />
+      <Association Name="User_Post" Member="User" ThisKey="AuthorID" OtherKey="UserID" Type="User" IsForeignKey="true" DeleteRule="SET NULL" />
     </Type>
   </Table>
 </Database>

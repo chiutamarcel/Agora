@@ -28,7 +28,13 @@ namespace Agora.MVVM.ViewModel
 
         public static explicit operator User(UserSettingsVM userSettingsVM)
         {
-            return new User(userSettingsVM._Username, userSettingsVM._UserPassword, userSettingsVM._UserEmail, userSettingsVM._Birthdate);
+            User tmp = new User { 
+                Username = userSettingsVM._Username, 
+                UserPassword = userSettingsVM._UserPassword,
+                UserEmail = userSettingsVM._UserEmail,
+                Birthdate = userSettingsVM._Birthdate
+            };
+            return tmp;
         }
     }
 }
