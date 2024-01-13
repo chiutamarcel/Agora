@@ -1,4 +1,5 @@
 ﻿using Agora.MVVM.Services;
+using Agora.MVVM.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,26 +22,27 @@ namespace Agora.MVVM.View
     /// </summary>
     public partial class UserSettingsView : Page
     {
+        MainWindow mainWindow;
+        AgoraDataContext dbContext;
+        User curUser;
         public UserSettingsView()
         {
             InitializeComponent();
-            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-            UserRepository userRepo = new UserRepository();
-            DataContext = userRepo.GetUser(mainWindow.UserID);
+            mainWindow = (MainWindow)Application.Current.MainWindow;
+            dbContext = new AgoraDataContext();
+            DataContext = curUser = (from usr in dbContext.Users where usr.UserID == mainWindow.UserID select usr).First();
         }
 
         private void logoutButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
             mainWindow.IsLoggedin = false;
             mainWindow.CurrentPage = "MainListView.xaml";
         }
 
         private void deleteAccountButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-            UserRepository userRepository = new UserRepository();
-            userRepository.DeleteUser(mainWindow.UserID);
+            dbContext.Users.DeleteOnSubmit(curUser);
+            dbContext.SubmitChanges();
             logoutButton_Click(sender, e);
         }
 
@@ -52,6 +54,30 @@ namespace Agora.MVVM.View
         private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void Applybutton_Click(object sender, RoutedEventArgs e)
+        {
+            if (passwordBox.Password != confirmPasswordBox.Password)
+            {
+                MessageBox.Show("Password doesn't match!");
+                return;
+            }
+
+            if (passwordBox.Password.Length < 8)
+            {
+                MessageBox.Show("Password should have at least 8 characters");
+                return;
+            }
+
+            curUser.Username = userNameTextBox.Text;
+            curUser.UserEmail = emailTextBox.Text;
+            curUser.UserPassword = passwordBox.Password;
+            curUser.Birthdate = DateTime.Parse(birthdateTextBox.Text);
+
+            dbContext.SubmitChanges();
+
+            mainWindow.CurrentPage = "MainListView.xaml";
         }
     }
 

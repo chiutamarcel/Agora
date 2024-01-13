@@ -108,6 +108,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Compile Include="MVVM\ViewModel\UserSettingsVM.cs" />
     <Compile Include="Seeder.cs" />
     <Page Include="MVVM\View\LoginView.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -33,7 +33,6 @@ namespace Agora
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            // TODO: move seeding code to a new class
             AgoraDataContext dataContext = new AgoraDataContext();
             Seeder seeder = new Seeder(dataContext);
             seeder.ClearDB();

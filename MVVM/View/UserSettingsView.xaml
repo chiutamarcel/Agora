@@ -76,10 +76,11 @@
 				Text="Name"
 				Style="{StaticResource SettingsName}"/>
             <TextBox 
+				Name="userNameTextBox"
 				Grid.Column="1" 
 				Grid.Row="0"
 				Style="{StaticResource SettingsBox}"
-				Text="{Binding Username}"/>
+				Text="{Binding Username, Mode=OneWay}"/>
 
             <TextBlock 
 				Grid.Column="0" 
@@ -87,10 +88,11 @@
 				Text="Email"
 				Style="{StaticResource SettingsName}"/>
             <TextBox 
+				Name="emailTextBox"
 				Grid.Column="1" 
 				Grid.Row="1"
 				Style="{StaticResource SettingsBox}"
-				Text="{Binding UserEmail}"/>
+				Text="{Binding UserEmail, Mode=OneWay}"/>
 
             <TextBlock 
 				Grid.Column="0" 
@@ -98,10 +100,11 @@
 				Text="Birthday"
 				Style="{StaticResource SettingsName}"/>
             <TextBox 
+				Name="birthdateTextBox"
 				Grid.Column="1" 
 				Grid.Row="2"
 				Style="{StaticResource SettingsBox}"
-				Text="{Binding Birthdate}"/>
+				Text="{Binding Birthdate, Mode=OneWay}"/>
 
             <TextBlock 
 				Grid.Column="0" 
@@ -109,6 +112,7 @@
 				Text="New Password"
 				Style="{StaticResource SettingsName}"/>
             <PasswordBox 
+				Name="passwordBox"
 				Grid.Column="1" 
 				Grid.Row="3"
 				Style="{StaticResource SettingsPasswordBox}"/>
@@ -119,6 +123,7 @@
 				Text="Confirm New Password"
 				Style="{StaticResource SettingsName}"/>
             <PasswordBox 
+				Name="confirmPasswordBox"
 				Grid.Column="1" 
 				Grid.Row="4"
 				Style="{StaticResource SettingsPasswordBox}"/>
@@ -131,7 +136,9 @@
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column="0" 
-                    Style="{StaticResource SettingsAcceptCancelButton}">
+                    Style="{StaticResource SettingsAcceptCancelButton}"
+					Name="Applybutton"
+					Click="Applybutton_Click">
                 Apply
             </Button>
             <Button Grid.Column="1" 
