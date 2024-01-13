@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Agora.MVVM.ViewModel
 {
-    internal class MainListVM
+    public class MainListVM
     {
         public string Title { get; set; }
         public string AuthorName { get; set; }

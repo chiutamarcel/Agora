@@ -144,8 +144,14 @@ namespace Agora
 			this._User = default(EntityRef<User>);
 			OnCreated();
 		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CommunityID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+
+        public Community(string communityName, int? communityAdmin) : this()
+        {
+            _CommunityName = communityName;
+            _CommunityAdmin = communityAdmin;
+        }
+
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CommunityID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int CommunityID
 		{
 			get
@@ -594,8 +600,14 @@ namespace Agora
 			this._User = default(EntityRef<User>);
 			OnCreated();
 		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CommunityID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+
+        public CommunitiesUser(int communityID, int userID) : this()
+        {
+            _CommunityID = communityID;
+            _UserID = userID;
+        }
+
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CommunityID", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int CommunityID
 		{
 			get

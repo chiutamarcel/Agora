@@ -12,19 +12,26 @@ using System.Windows.Controls;
 
 namespace Agora.MVVM.Services
 {
-    class UserRepository
+    public class UserRepository
     {
-        private AgoraDataContext dataContext;
-        public UserRepository()
-        {
-            dataContext = new AgoraDataContext();
-        }
+        private static AgoraDataContext dataContext = new AgoraDataContext();
+        //public UserRepository()
+        //{
+        //    dataContext = new AgoraDataContext();
+        //}
 
-        public List<User> GetAllUsers()
+        public static List<User> GetAllUsers()
         {
             var users = (from u in dataContext.Users select u).ToList();
 
             return users;
+        }
+
+        public User GetUser(int userID)
+        {
+            var user = (from u in dataContext.Users where u.UserID == userID select u).First();
+
+            return user;
         }
 
         public int RegisterUser(User user)

@@ -24,6 +24,9 @@ namespace Agora.MVVM.View
         public UserSettingsView()
         {
             InitializeComponent();
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            UserRepository userRepo = new UserRepository();
+            DataContext = userRepo.GetUser(mainWindow.UserID);
         }
 
         private void logoutButton_Click(object sender, RoutedEventArgs e)

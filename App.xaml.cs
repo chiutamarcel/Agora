@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Data.Linq;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,9 +26,6 @@ namespace Agora
         {
             IServiceCollection services = new ServiceCollection();
 
-            PostsRepository repo = new PostsRepository();
-            repo.Seed();
-
             services.AddSingleton<MainWindow>();
 
             _serviceProvider = services.BuildServiceProvider();
@@ -35,6 +33,15 @@ namespace Agora
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            // TODO: move seeding code to a new class
+            AgoraDataContext dataContext = new AgoraDataContext();
+            Seeder seeder = new Seeder(dataContext);
+            seeder.ClearDB();
+            seeder.SeedUsers();
+            seeder.SeedCommunities();
+            seeder.AssignUsersToCommunities();
+            seeder.SeedPosts();
+
             var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
             mainWindow.Show();
             base.OnStartup(e);

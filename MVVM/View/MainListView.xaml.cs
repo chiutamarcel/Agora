@@ -1,4 +1,5 @@
 ﻿using Agora.MVVM.Repository;
+using Agora.MVVM.Services;
 using Agora.MVVM.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -22,12 +23,13 @@ namespace Agora.MVVM.View
     /// </summary>
     public partial class MainListView : Page
     {
+        private PostsRepository postsRepository;
         public MainListView()
         {
             InitializeComponent();
 
-            PostsRepository postRepo = new PostsRepository();
-            List<MainListVM> posts = postRepo.GetPostsList();
+            postsRepository = new PostsRepository();
+            List<MainListVM> posts = postsRepository.GetPostsList();
             listView.ItemsSource = posts;
 
         }
