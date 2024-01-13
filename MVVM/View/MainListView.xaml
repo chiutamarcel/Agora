@@ -3,35 +3,37 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"            
       xmlns:local="clr-namespace:Agora.MVVM.View"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="450"
       Title="MainListView">
 
-	<Grid Background="White">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="auto"/>
-			<RowDefinition Height="auto"/>
-		</Grid.RowDefinitions>
+    
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
 
-		<!--Filters-->
-		<Grid Grid.Row="0" Name="FilterView">
+        <!--Filters-->
+        <Grid Grid.Row="0" Name="FilterView">
 
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="*"/>
-			</Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-			<Button Content="Posts" Grid.Column="0" Style="{StaticResource MaterialDesignPaperLightButton}"/>
-			<Button Content="Communities" Grid.Column="1" Style="{StaticResource MaterialDesignPaperLightButton}"/>
-			<Button Content="Popular" Grid.Column="2" Style="{StaticResource MaterialDesignPaperLightButton}"/>
-			<Button Content="New" Grid.Column="3" Style="{StaticResource MaterialDesignPaperLightButton}"/>
+            <Button Content="Posts" Grid.Column="0" Style="{StaticResource MaterialDesignPaperLightButton}"/>
+            <Button Content="Communities" Grid.Column="1" Style="{StaticResource MaterialDesignPaperLightButton}"/>
+            <Button Content="Popular" Grid.Column="2" Style="{StaticResource MaterialDesignPaperLightButton}"/>
+            <Button Content="New" Grid.Column="3" Style="{StaticResource MaterialDesignPaperLightButton}"/>
 
-		</Grid>
+        </Grid>
 
-		<ListView 
+        <ListView 
 		Name="listView"
 		Height="auto"
 		HorizontalAlignment="Stretch"
@@ -43,63 +45,158 @@
 		ScrollViewer.VerticalScrollBarVisibility="Disabled"
 		ScrollViewer.HorizontalScrollBarVisibility="Disabled"
 		ScrollViewer.CanContentScroll="False">
+            <ListView.ItemTemplate>
+                <DataTemplate x:Name="MainListCard">
+                    <Border
+                    BorderThickness="2" 
+                    BorderBrush="Black"
+                    CornerRadius="5">
+                        <Grid 
+                        Margin="0"
+			            Background="Transparent"
+			            Width="auto">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="35"/>
+                                <RowDefinition Height="70"/>
+                                <RowDefinition Height="30"/>
+                                <!--<RowDefinition Height="5" />-->
+                            </Grid.RowDefinitions>
 
-			<ListView.ItemTemplate>
-				<DataTemplate>
-					<Grid 
-					Background="White"
-					Width="auto">
-						<Grid.RowDefinitions>
-							<RowDefinition Height="25"  />
-							<RowDefinition Height="35"  />
-							<RowDefinition Height="70" />
-							<!--<RowDefinition Height="5" />-->
-						</Grid.RowDefinitions>
+                            <Grid Grid.Row="0" HorizontalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
 
-						<Grid Grid.Row="0" HorizontalAlignment="Stretch">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="*"/>
-								<ColumnDefinition Width="*"/>
-								<ColumnDefinition Width="*"/>
-							</Grid.ColumnDefinitions>
+                                <TextBlock
+							            Grid.Column="0"
+							            FontSize="18"
+							            Text="{Binding Community, StringFormat=a/\{0\}}"
+							            TextAlignment="Left"/>
 
-							<TextBlock
-							Grid.Column="0"
-							FontSize="18"
-							Text="{Binding Community, StringFormat=a/\{0\}}"
-							TextAlignment="Left"/>
+                                <TextBlock 
+							            Grid.Column="1"
+							            Text="{Binding AuthorName, StringFormat=Posted by \{0\}}"
+							            TextAlignment="Center"/>
 
-							<TextBlock 
-							Grid.Column="1"
-							Text="{Binding AuthorName, StringFormat=Posted by \{0\}}"
-							TextAlignment="Center"/>
+                                <TextBlock 
+							            Grid.Column="2"
+							            Text="{Binding PostDateDiff, StringFormat=\{0\} ago}"
+							            TextAlignment="Right"/>
+                            </Grid>
 
-							<TextBlock 
-							Grid.Column="2"
-							Text="{Binding PostDateDiff, StringFormat=\{0\} ago}"
-							TextAlignment="Right"/>
-						</Grid>
+                            <TextBlock 
+						            Grid.Row="1"
+						            Text="{Binding Title}"
+						            FontSize="21"
+						            VerticalAlignment="Center"
+						            FontWeight="Bold"/>
+                            <TextBlock 
+						            Grid.Row="2" 
+						            TextTrimming="CharacterEllipsis" 
+						            TextWrapping="Wrap"
+						            TextAlignment="Left"
+						            FontSize="16"
+						            HorizontalAlignment="Stretch"
+						            Text="{Binding Content}"/>
+                            <!--<Separator Grid.Row="3"/>-->
+                            <Grid Grid.Row="3"
+                                HorizontalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="10"/>
+                                </Grid.ColumnDefinitions>
+                               
+                                <ToggleButton
+                                    x:Name="UpVote"
+                                    Grid.Column="1"
+                                    Height="auto"
+                                    Width="auto"
+                                    Content="{materialDesign:PackIcon Kind=ArrowUpBoldOutline,Size=21}"
+                                    IsChecked="{Binding !IsChecked, ElementName=DownVote}"
+                                    Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
+                                    ToolTip="UpVote"
+                                    Background="Green"
+                                    BorderThickness="0"
+                                    Click="UpVote_Click"
+                                    />
 
-						<TextBlock 
-						Grid.Row="1"
-						Text="{Binding Title}"
-						FontSize="21"
-						VerticalAlignment="Center"
-						FontWeight="Bold"/>
-						<TextBlock 
-						Grid.Row="2" 
-						TextTrimming="CharacterEllipsis" 
-						TextWrapping="Wrap"
-						TextAlignment="Left"
-						FontSize="16"
-						HorizontalAlignment="Stretch"
-						Text="{Binding Content}"/>
-						<!--<Separator Grid.Row="3"/>-->
-					</Grid>
+                                <TextBlock 
+                                    x:Name="VoteCount"
+                                    Grid.Column="2"
+                                    Text="{Binding VoteCount}"
+                                    TextAlignment="Center"
+                                    VerticalAlignment="Center">
+                                </TextBlock>
 
-				</DataTemplate>
-			</ListView.ItemTemplate>
-		</ListView>
-	</Grid>
+                                <ToggleButton
+                                    x:Name="DownVote"
+                                    Grid.Column="3"
+                                    Height="auto"
+                                    Width="auto"
+                                    Content="{materialDesign:PackIcon Kind=ArrowDownBoldOutline,                                                         Size=21}"
+                                    IsChecked="False"
+                                    Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
+                                    ToolTip="DownVote"
+                                    Background="Red"
+                                    BorderThickness="0"
+                                    Click="DownVote_Click"
+                                    />
+
+                                <TextBox
+                                    Grid.Column="4"
+                                    x:Name="CommentTextBox"
+                                    materialDesign:HintAssist.HelperTextFontSize="16"
+                                    materialDesign:HintAssist.Hint="Comment"
+                                    materialDesign:HintAssist.HintOpacity="0.5"
+                                    BorderThickness="1"
+                                    materialDesign:TextFieldAssist.TextFieldCornerRadius="10"
+                                >
+                                </TextBox>
+                                
+                                <Button
+                                    Grid.Column="5"
+                                    Height="auto"
+                                    Width="auto"                                   
+                                    Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
+                                    Background="Transparent"
+                                    Foreground="Black"
+                                    materialDesign:ElevationAssist.Elevation="Dp0"
+                                    ToolTip="MaterialDesignIconForegroundButton"
+                                    >
+                                    <materialDesign:PackIcon
+                                    Kind="ApplicationEditOutline"
+                                    />
+                                </Button>
+
+                                <Button
+                                    Grid.Column="6"
+                                    Height="auto"
+                                    Width="auto"                                   
+                                    Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
+                                    Background="Transparent"
+                                    Foreground="Black"
+                                    materialDesign:ElevationAssist.Elevation="Dp0"
+                                    ToolTip="MaterialDesignIconForegroundButton"
+                                    >
+                                    <materialDesign:PackIcon
+                                    Kind="DeleteEmptyOutline"
+                                    />
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
 
 </Page>

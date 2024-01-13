@@ -13,6 +13,8 @@ namespace Agora.MVVM.ViewModel
         public string Community { get; set; }
         public string Content { get; set; }
         public string PostDate { get; set; }
+        public int VoteCount { get; set; }
+        public int Vote { get; set; }
 
         public MainListVM(string title, string authorName, string community, string content, string postDate)
         {
@@ -21,6 +23,8 @@ namespace Agora.MVVM.ViewModel
             Community = community;
             Content = content;
             PostDate = postDate;
+            VoteCount = 0;
+            Vote = 0;
         }
     }
 }
