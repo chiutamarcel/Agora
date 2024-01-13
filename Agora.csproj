@@ -100,6 +100,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MainListCard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MVVM\View\AddPostView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -108,6 +112,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Compile Include="MainListCard.xaml.cs">
+      <DependentUpon>MainListCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\ViewModel\UserSettingsVM.cs" />
     <Compile Include="Seeder.cs" />
     <Page Include="MVVM\View\LoginView.xaml">

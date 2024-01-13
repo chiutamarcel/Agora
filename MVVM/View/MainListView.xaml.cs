@@ -49,10 +49,10 @@ namespace Agora.MVVM.View
         private void DownVote_Click(object sender, RoutedEventArgs e)
         {
             Button thisBtn = (Button)sender;
-            MainListCard parent = thisBtn.Parent as MainListCard;
-            int itemIndex = listView.Items.IndexOf(parent);
-            var item = listView.Items[itemIndex] as MainListVM;
-            var container = listView.ContainerFromElement(listView.Items[itemIndex]);
+            //MainListCard parent = thisBtn.Parent as MainListCard;
+            //int itemIndex = listView.Items.IndexOf(parent);
+            //var item = listView.Items[itemIndex] as MainListVM;
+            //var container = listView.ContainerFromElement(listView.Items[itemIndex]);
             //item.Vote = -1;
             //item.VoteCount--;
         }
