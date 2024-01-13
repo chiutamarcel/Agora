@@ -23,14 +23,12 @@ namespace Agora.MVVM.View
     public partial class UserSettingsView : Page
     {
         MainWindow mainWindow;
-        AgoraDataContext dbContext;
         User curUser;
         public UserSettingsView()
         {
             InitializeComponent();
             mainWindow = (MainWindow)Application.Current.MainWindow;
-            dbContext = new AgoraDataContext();
-            DataContext = curUser = (from usr in dbContext.Users where usr.UserID == mainWindow.UserID select usr).First();
+            DataContext = curUser = (from usr in App.dbContext.Users where usr.UserID == mainWindow.UserID select usr).First();
         }
 
         private void logoutButton_Click(object sender, RoutedEventArgs e)
@@ -41,8 +39,8 @@ namespace Agora.MVVM.View
 
         private void deleteAccountButton_Click(object sender, RoutedEventArgs e)
         {
-            dbContext.Users.DeleteOnSubmit(curUser);
-            dbContext.SubmitChanges();
+            App.dbContext.Users.DeleteOnSubmit(curUser);
+            App.dbContext.SubmitChanges();
             logoutButton_Click(sender, e);
         }
 
@@ -58,24 +56,29 @@ namespace Agora.MVVM.View
 
         private void Applybutton_Click(object sender, RoutedEventArgs e)
         {
-            if (passwordBox.Password != confirmPasswordBox.Password)
+            if (passwordBox.Password.Length > 0 || confirmPasswordBox.Password.Length > 0)
             {
-                MessageBox.Show("Password doesn't match!");
-                return;
-            }
+                if (passwordBox.Password != confirmPasswordBox.Password)
+                {
+                    MessageBox.Show("Password doesn't match!");
+                    return;
+                }
 
-            if (passwordBox.Password.Length < 8)
-            {
-                MessageBox.Show("Password should have at least 8 characters");
-                return;
+                if (passwordBox.Password.Length < 8)
+                {
+                    MessageBox.Show("Password should have at least 8 characters");
+                    return;
+                }
+
+                curUser.UserPassword = passwordBox.Password;
             }
 
             curUser.Username = userNameTextBox.Text;
             curUser.UserEmail = emailTextBox.Text;
-            curUser.UserPassword = passwordBox.Password;
+            
             curUser.Birthdate = DateTime.Parse(birthdateTextBox.Text);
 
-            dbContext.SubmitChanges();
+            App.dbContext.SubmitChanges();
 
             mainWindow.CurrentPage = "MainListView.xaml";
         }

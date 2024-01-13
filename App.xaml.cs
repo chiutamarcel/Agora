@@ -21,20 +21,22 @@ namespace Agora
     public partial class App : Application
     {
         private readonly ServiceProvider _serviceProvider;
+        public static AgoraDataContext dbContext;
 
         public App()
         {
             IServiceCollection services = new ServiceCollection();
 
             services.AddSingleton<MainWindow>();
+            services.AddSingleton<AgoraDataContext>();
 
             _serviceProvider = services.BuildServiceProvider();
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            AgoraDataContext dataContext = new AgoraDataContext();
-            Seeder seeder = new Seeder(dataContext);
+            dbContext = new AgoraDataContext();
+            Seeder seeder = new Seeder(dbContext);
             seeder.ClearDB();
             seeder.SeedUsers();
             seeder.SeedCommunities();
