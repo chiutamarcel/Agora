@@ -45,7 +45,7 @@
 
 				<TextBlock
 					Grid.Column="2"
-					Text="{Binding PostDateDiff, StringFormat=\{0\} ago}"
+					Text="{Binding PostDate}"
 					TextAlignment="Right" />
 			</Grid>
 

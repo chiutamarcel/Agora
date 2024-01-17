@@ -3,7 +3,9 @@ using Agora.MVVM.Services;
 using Agora.MVVM.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,18 +23,76 @@ namespace Agora.MVVM.View
     /// <summary>
     /// Interaction logic for MainListView.xaml
     /// </summary>
+    /// 
+    enum SortType
+    {
+        NONE,
+        POPULAR,
+        NEW,
+    }
+
     public partial class MainListView : Page
     {
         private PostsRepository postsRepository;
+        List<MainListVM> _posts;
+        List<MainListVM> Posts
+        {
+            get { return _posts; }
+            set { _posts = value; OnPropertyChanged(); }
+        }
+
+        SortType sortType;
 
         public MainListView()
         {
             InitializeComponent();
 
             postsRepository = new PostsRepository();
-            List<MainListVM> posts = postsRepository.GetPostsList();
-            mainList.ItemsSource = posts;
-            
+            Posts = postsRepository.GetPostsList();
+            mainList.ItemsSource = Posts;
+            sortType = SortType.NONE;
         }
+
+        private void sortPopularBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (sortType == SortType.POPULAR)
+            {
+                Posts = Posts.OrderBy(o => o.VoteCount).ToList();
+                sortType = SortType.NONE;
+                mainList.ItemsSource = Posts;
+            } 
+            else
+            {
+                Posts = Posts.OrderByDescending(o => o.VoteCount).ToList();
+                sortType = SortType.POPULAR;
+                mainList.ItemsSource = Posts;
+            }
+        }
+
+        private void sortNewBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (sortType == SortType.NEW)
+            {
+                Posts = Posts.OrderByDescending(o => DateTime.Parse(o.PostDate)).ToList();
+                sortType = SortType.NONE;
+                mainList.ItemsSource = Posts;
+            }
+            else
+            {
+                Posts = Posts.OrderBy(o => DateTime.Parse(o.PostDate)).ToList();
+                sortType = SortType.NEW;
+                mainList.ItemsSource = Posts;
+            }
+        }
+
+        private void OnPropertyChanged([CallerMemberName] string caller = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(caller));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

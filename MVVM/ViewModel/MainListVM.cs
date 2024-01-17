@@ -33,6 +33,16 @@ namespace Agora.MVVM.ViewModel
             VoteCount = voteCount;
         }
 
+        public MainListVM(string title, string authorName, string community, string content, DateTime? postDate, int voteCount)
+        {
+            Title = title;
+            AuthorName = authorName;
+            Community = community;
+            Content = content;
+            PostDate = postDate.ToString();
+            VoteCount = voteCount;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged([CallerMemberName] string caller = "")
