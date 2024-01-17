@@ -36,12 +36,12 @@ namespace Agora
         protected override void OnStartup(StartupEventArgs e)
         {
             dbContext = new AgoraDataContext();
-            Seeder seeder = new Seeder(dbContext);
-            seeder.ClearDB();
-            seeder.SeedUsers();
-            seeder.SeedCommunities();
-            seeder.AssignUsersToCommunities();
-            seeder.SeedPosts();
+            //Seeder seeder = new Seeder(dbContext);
+            //seeder.ClearDB();
+            //seeder.SeedUsers();
+            //seeder.SeedCommunities();
+            //seeder.AssignUsersToCommunities();
+            //seeder.SeedPosts();
 
             var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
             mainWindow.Show();

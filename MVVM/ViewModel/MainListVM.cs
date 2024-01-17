@@ -23,14 +23,14 @@ namespace Agora.MVVM.ViewModel
             set { _voteCount = value; OnPropertyChanged(); }
         }
 
-        public MainListVM(string title, string authorName, string community, string content, string postDate)
+        public MainListVM(string title, string authorName, string community, string content, string postDate, int voteCount)
         {
             Title = title;
             AuthorName = authorName;
             Community = community;
             Content = content;
             PostDate = postDate;
-            VoteCount = 0;
+            VoteCount = voteCount;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

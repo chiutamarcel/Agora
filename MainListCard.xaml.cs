@@ -29,34 +29,43 @@ namespace Agora
         private void UpVote_Click(object sender, RoutedEventArgs e)
         {
             MainListVM source = DataContext as MainListVM;
+            var postSource = (from p in App.dbContext.Posts where p.PostTitle == source.Title select p).First();
 
             if (UpVote.IsChecked == true)
             {
                 source.VoteCount++;
+                postSource.VoteCount++;
+
+
                 DownVote.IsChecked = false;
             } 
             else
             {
                 source.VoteCount--;
+                postSource.VoteCount--;
             }
-            
 
+            App.dbContext.SubmitChanges();
         }
 
         private void DownVote_Click(object sender, RoutedEventArgs e)
         {
             MainListVM source = DataContext as MainListVM;
+            var postSource = (from p in App.dbContext.Posts where p.PostTitle == source.Title select p).First();
+
             if (DownVote.IsChecked == true)
             {
                 source.VoteCount--;
+                postSource.VoteCount--;
                 UpVote.IsChecked = false;
             } else
             {
                 source.VoteCount++;
+                postSource.VoteCount++;
             }
-            
 
 
+            App.dbContext.SubmitChanges();
         }
     }
 }

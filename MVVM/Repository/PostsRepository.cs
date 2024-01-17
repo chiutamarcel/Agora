@@ -26,7 +26,8 @@ namespace Agora.MVVM.Repository
                                             user.Username,
                                             community.CommunityName,
                                             post.PostText,
-                                            post.PostDate.ToString()
+                                            post.PostDate.ToString(),
+                                            post.VoteCount
                                         )).ToList();
 
             return posts;

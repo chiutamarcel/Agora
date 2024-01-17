@@ -86,7 +86,7 @@
 					Click="UpVote_Click"
 					Content="{materialDesign:PackIcon Kind=ArrowUpBoldOutline,
 					                                  Size=21}"
-					IsChecked="{Binding !IsChecked, ElementName=DownVote}"
+					IsChecked="False"
 					Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
 					ToolTip="UpVote" />
 
