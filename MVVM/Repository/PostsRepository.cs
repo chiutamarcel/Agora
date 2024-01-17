@@ -32,5 +32,11 @@ namespace Agora.MVVM.Repository
 
             return posts;
         }
+
+        public void AddPost(Post post)
+        {
+            App.dbContext.Posts.InsertOnSubmit(post);
+            App.dbContext.SubmitChanges();  
+        }
     }
 }
