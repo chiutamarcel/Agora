@@ -35,10 +35,10 @@ namespace Agora.MVVM.View
     {
         private PostsRepository postsRepository;
         List<MainListVM> _posts;
-        List<MainListVM> Posts
+        public List<MainListVM> Posts
         {
             get { return _posts; }
-            set { _posts = value; OnPropertyChanged(); }
+            set { _posts = value; OnPropertyChanged(); mainList.ItemsSource = Posts; }
         }
 
         SortType sortType;
@@ -49,7 +49,7 @@ namespace Agora.MVVM.View
 
             postsRepository = new PostsRepository();
             Posts = postsRepository.GetPostsList();
-            mainList.ItemsSource = Posts;
+            //mainList.ItemsSource = Posts;
             sortType = SortType.NONE;
         }
 
@@ -59,13 +59,13 @@ namespace Agora.MVVM.View
             {
                 Posts = Posts.OrderBy(o => o.VoteCount).ToList();
                 sortType = SortType.NONE;
-                mainList.ItemsSource = Posts;
+                //mainList.ItemsSource = Posts;
             } 
             else
             {
                 Posts = Posts.OrderByDescending(o => o.VoteCount).ToList();
                 sortType = SortType.POPULAR;
-                mainList.ItemsSource = Posts;
+                //mainList.ItemsSource = Posts;
             }
         }
 
@@ -75,13 +75,13 @@ namespace Agora.MVVM.View
             {
                 Posts = Posts.OrderByDescending(o => DateTime.Parse(o.PostDate)).ToList();
                 sortType = SortType.NONE;
-                mainList.ItemsSource = Posts;
+                //mainList.ItemsSource = Posts;
             }
             else
             {
                 Posts = Posts.OrderBy(o => DateTime.Parse(o.PostDate)).ToList();
                 sortType = SortType.NEW;
-                mainList.ItemsSource = Posts;
+                //mainList.ItemsSource = Posts;
             }
         }
 
