@@ -7,7 +7,7 @@
       xmlns:local="clr-namespace:Agora.MVVM.View"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AddPostView">
+      Title="AddPostView-as">
 
 
     <Grid Background="White">
@@ -50,15 +50,14 @@
                     Text="Choose a comunity: "
                     VerticalAlignment="Center"
                     />
-                <ComboBox 
+                <ComboBox                     
                     ItemsSource="{Binding Communities}"
-                    SelectedItem="{Binding SelectedCommunity}"
-                    Margin="10"
+                    SelectedItem="{Binding SelectedCommunity, Mode=TwoWay}" 
                     />
             </StackPanel>
 
             <TextBox 
-                x:Name="Title"
+                x:Name="PostTitle"
                 FontSize="12"    
                 TextWrapping="NoWrap"
                 AcceptsReturn="False"
@@ -69,14 +68,14 @@
                 Style="{StaticResource MaterialDesignTextBox}"
                 Margin="10"
                 Grid.Row="1"
-                Text="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                Text="{Binding PostTitle, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                 materialDesign:HintAssist.Hint="Title"
                 materialDesign:HintAssist.IsFloating="True"
                 materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource PrimaryHueMidBrush}"
                 />
 
             <TextBox            
-                x:Name="Content"                
+                x:Name="PostContent"                
                 TextWrapping="Wrap"
                 AcceptsReturn="True"
                 AcceptsTab="True"
@@ -84,7 +83,7 @@
                 Style="{StaticResource MaterialDesignTextBox}"
                 Margin="10"
                 Grid.Row="2"
-                Text="{Binding Content, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                Text="{Binding PostContent, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                 materialDesign:HintAssist.Hint="Content"
                 materialDesign:HintAssist.IsFloating="True"                
                 materialDesign:TextFieldAssist.HasOutlinedTextField="True"

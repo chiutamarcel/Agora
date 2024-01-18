@@ -35,6 +35,10 @@ namespace Agora.MVVM.Repository
 
         public void AddPost(Post post)
         {
+            if (post == null)
+            {
+                   throw new ArgumentNullException("post");
+            }
             App.dbContext.Posts.InsertOnSubmit(post);
             App.dbContext.SubmitChanges();  
         }
