@@ -42,14 +42,31 @@ namespace Agora.MVVM.View
         }
 
         SortType sortType;
+        bool _showCommunities;
+        public bool ShowCommunities 
+        {
+            get { return _showCommunities;  } 
+            set 
+            { 
+                _showCommunities = value;
+
+                if (_showCommunities == true)
+                {
+                    GetCommunitiesFromDB();
+                } else
+                {
+                    GetPostsFromDB();
+                }
+            } 
+        }
 
         public MainListView()
         {
             InitializeComponent();
 
             postsRepository = new PostsRepository();
+            ShowCommunities = false;
             Posts = postsRepository.GetPostsList();
-            //mainList.ItemsSource = Posts;
             sortType = SortType.NONE;
         }
 
@@ -59,13 +76,11 @@ namespace Agora.MVVM.View
             {
                 Posts = Posts.OrderBy(o => o.VoteCount).ToList();
                 sortType = SortType.NONE;
-                //mainList.ItemsSource = Posts;
             } 
             else
             {
                 Posts = Posts.OrderByDescending(o => o.VoteCount).ToList();
                 sortType = SortType.POPULAR;
-                //mainList.ItemsSource = Posts;
             }
         }
 
@@ -75,13 +90,11 @@ namespace Agora.MVVM.View
             {
                 Posts = Posts.OrderByDescending(o => DateTime.Parse(o.PostDate)).ToList();
                 sortType = SortType.NONE;
-                //mainList.ItemsSource = Posts;
             }
             else
             {
                 Posts = Posts.OrderBy(o => DateTime.Parse(o.PostDate)).ToList();
                 sortType = SortType.NEW;
-                //mainList.ItemsSource = Posts;
             }
         }
 
@@ -94,5 +107,32 @@ namespace Agora.MVVM.View
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        private void filterPostsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ShowCommunities = false;
+        }
+
+        private void filterComsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ShowCommunities = true;
+        }
+
+        private void GetCommunitiesFromDB()
+        {
+            // TODO: don't show date of community
+            // TODO: show member count of community
+            Posts = (
+                from com in App.dbContext.Communities 
+                join admin in App.dbContext.Users
+                on com.CommunityAdmin equals admin.UserID
+                select new MainListVM(com.CommunityName, admin.Username, string.Empty, string.Empty, DateTime.Now.ToString(), 0)
+                ).ToList();
+        }
+
+        private void GetPostsFromDB()
+        {
+            Posts = postsRepository.GetPostsList();
+        }
     }
 }
