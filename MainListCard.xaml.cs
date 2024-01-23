@@ -76,5 +76,13 @@ namespace Agora
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
             mainWindow.CurrentPage = "EditPostView.xaml";
         }
+
+        private void OpenPost_Click(object sender, RoutedEventArgs e)
+        {
+            ((App)Application.Current).selectedPostID = ((MainListVM)DataContext).PostID;
+
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            mainWindow.CurrentPage = "PostView.xaml";
+        }
     }
 }
