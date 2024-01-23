@@ -25,31 +25,17 @@
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*" />
 				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
 
 			<Button
-				Name="filterPostsBtn"
-				Grid.Column="0"
-				Click="filterPostsBtn_Click"
-				Content="Posts"
-				Style="{StaticResource MaterialDesignPaperLightButton}" />
-			<Button
-				Name="filterComsBtn"
-				Grid.Column="1"
-				Click="filterComsBtn_Click"
-				Content="Communities"
-				Style="{StaticResource MaterialDesignPaperLightButton}" />
-			<Button
 				Name="sortPopularBtn"
-				Grid.Column="2"
+				Grid.Column="0"
 				Click="sortPopularBtn_Click"
 				Content="Popular"
 				Style="{StaticResource MaterialDesignPaperLightButton}" />
 			<Button
 				Name="sortNewBtn"
-				Grid.Column="3"
+				Grid.Column="1"
 				Click="sortNewBtn_Click"
 				Content="New"
 				Style="{StaticResource MaterialDesignPaperLightButton}" />
