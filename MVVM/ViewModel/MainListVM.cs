@@ -15,7 +15,7 @@ namespace Agora.MVVM.ViewModel
         public string AuthorName { get; set; }
         public string Community { get; set; }
         public string Content { get; set; }
-        public string PostDate { get; set; }
+        public DateTime PostDate { get; set; }
 
         private int _voteCount;
         public int VoteCount { 
@@ -23,23 +23,13 @@ namespace Agora.MVVM.ViewModel
             set { _voteCount = value; OnPropertyChanged(); }
         }
 
-        public MainListVM(string title, string authorName, string community, string content, string postDate, int voteCount)
+        public MainListVM(string title, string authorName, string community, string content, DateTime postDate, int voteCount)
         {
             Title = title;
             AuthorName = authorName;
             Community = community;
             Content = content;
             PostDate = postDate;
-            VoteCount = voteCount;
-        }
-
-        public MainListVM(string title, string authorName, string community, string content, DateTime? postDate, int voteCount)
-        {
-            Title = title;
-            AuthorName = authorName;
-            Community = community;
-            Content = content;
-            PostDate = postDate.ToString();
             VoteCount = voteCount;
         }
 

@@ -159,7 +159,7 @@ namespace Agora
                     where post.PostTitle.ToLower().Contains(searchText.ToLower())  ||
                             post.PostText.ToLower().Contains(searchText.ToLower()) ||
                             user.Username.ToLower().Contains(searchText.ToLower())
-                    select new MainListVM(post.PostTitle, user.Username, community.CommunityName, post.PostText, post.PostDate, post.VoteCount)
+                    select new MainListVM(post.PostTitle, user.Username, community.CommunityName, post.PostText, (DateTime)post.PostDate, post.VoteCount)
                 )
                 .ToList();
 

@@ -75,8 +75,8 @@ namespace Agora.MVVM.View
 
             curUser.Username = userNameTextBox.Text;
             curUser.UserEmail = emailTextBox.Text;
-            
-            curUser.Birthdate = DateTime.Parse(birthdateTextBox.Text);
+
+            curUser.Birthdate = (DateTime) birtdatePicker.SelectedDate;
 
             App.dbContext.SubmitChanges();
 

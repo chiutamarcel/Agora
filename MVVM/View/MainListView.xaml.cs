@@ -88,12 +88,12 @@ namespace Agora.MVVM.View
         {
             if (sortType == SortType.NEW)
             {
-                Posts = Posts.OrderByDescending(o => DateTime.Parse(o.PostDate)).ToList();
+                Posts = Posts.OrderByDescending(o => o.PostDate).ToList();
                 sortType = SortType.NONE;
             }
             else
             {
-                Posts = Posts.OrderBy(o => DateTime.Parse(o.PostDate)).ToList();
+                Posts = Posts.OrderBy(o => o.PostDate).ToList();
                 sortType = SortType.NEW;
             }
         }
@@ -120,13 +120,11 @@ namespace Agora.MVVM.View
 
         private void GetCommunitiesFromDB()
         {
-            // TODO: don't show date of community
-            // TODO: show member count of community
             Posts = (
                 from com in App.dbContext.Communities 
                 join admin in App.dbContext.Users
                 on com.CommunityAdmin equals admin.UserID
-                select new MainListVM(com.CommunityName, admin.Username, string.Empty, string.Empty, DateTime.Now.ToString(), 0)
+                select new MainListVM(com.CommunityName, admin.Username, string.Empty, string.Empty, DateTime.Now, 0)
                 ).ToList();
         }
 
