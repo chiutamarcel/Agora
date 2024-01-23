@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7107f2d4fe9640a788a72a2399f4f651" Name="Diagram1">
+        <EntityTypeShape EntityType="AgoraDBModel.Comment" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="AgoraDBModel.CommentVote" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AgoraDBModel.Community" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AgoraDBModel.Post" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="AgoraDBModel.PostVote" Width="1.5" PointX="7.5" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AgoraDBModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AgoraDBModel.User" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <AssociationConnector Association="AgoraDBModel.FK_Comments_AuthorID" ManuallyRouted="false" />
+        <AssociationConnector Association="AgoraDBModel.FK_Comments_PostID" ManuallyRouted="false" />
+        <AssociationConnector Association="AgoraDBModel.FK_CommentVotes_Comments" ManuallyRouted="false" />
+        <AssociationConnector Association="AgoraDBModel.FK_CommentVotes_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="AgoraDBModel.FK__Posts__Community__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="AgoraDBModel.fk_communityAdmin" ManuallyRouted="false" />
+        <AssociationConnector Association="AgoraDBModel.fk_authorID" ManuallyRouted="false" />
+        <AssociationConnector Association="AgoraDBModel.FK_Votes_PostID" ManuallyRouted="false" />
+        <AssociationConnector Association="AgoraDBModel.FK_Votes_AuthorID" ManuallyRouted="false" />
+        <AssociationConnector Association="AgoraDBModel.CommunitiesUsers" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

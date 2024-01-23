@@ -90,8 +90,7 @@ namespace Agora.MVVM.View
             post.CommunityID = community.CommunityID;
             post.PostTitle = PostTitle.Text;
             post.PostText = PostContent.Text;
-            post.PostDate = DateTime.Now;
-            post.VoteCount = 0;               
+            post.PostDate = DateTime.Now;              
             postsRepository.AddPost(post);
 
             mainWindow.CurrentPage = "MainListView.xaml";
@@ -105,25 +104,18 @@ namespace Agora.MVVM.View
 
         private void InitializeCommunities()
         {
-            var communities = (from commun in App.dbContext.Communities 
-                               join communUser in App.dbContext.CommunitiesUsers 
-                               on commun.CommunityID equals communUser.CommunityID
-                               join usrs in App.dbContext.Users
-                               on communUser.UserID equals usrs.UserID
-                               where usrs.Username == ((MainWindow)Application.Current.MainWindow).username
-                               select commun.CommunityName).ToList();
+            var loggedUser = App.dbContext.Users.Where(u => u.Username == ((MainWindow)Application.Current.MainWindow).username).First();
+            var communities = loggedUser.CommunitiesMember.ToList();
 
             Communities = new ObservableCollection<string>();
             
             // make this isSelected = true            
             Communities.Add("My profile");
-            
-            
 
             foreach( var community in communities)
             {
                 // add before community a/
-                string communityName = "a/" + community;
+                string communityName = "a/" + community.CommunityName;
                 Communities.Add(communityName);
             }
 

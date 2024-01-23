@@ -32,8 +32,8 @@ namespace Agora.MVVM.Services
 
         public int RegisterUser(User user)
         {
-            App.dbContext.Users.InsertOnSubmit(user);
-            App.dbContext.SubmitChanges();
+            App.dbContext.Users.Add(user);
+            App.dbContext.SaveChanges();
 
             return LoginUser(user.Username, user.UserPassword);
         }
@@ -49,8 +49,8 @@ namespace Agora.MVVM.Services
         {
             var user = (from usr in App.dbContext.Users where usr.UserID == userId select usr).First();
 
-            App.dbContext.Users.DeleteOnSubmit(user);
-            App.dbContext.SubmitChanges();
+            App.dbContext.Users.Remove(user);
+            App.dbContext.SaveChanges();
         }
 
     }

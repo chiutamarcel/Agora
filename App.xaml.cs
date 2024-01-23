@@ -23,21 +23,21 @@ namespace Agora
         public int selectedPostID { get; set;}
 
         private readonly ServiceProvider _serviceProvider;
-        public static AgoraDataContext dbContext;
+        public static AgoraDBEntities dbContext;
 
         public App()
         {
             IServiceCollection services = new ServiceCollection();
 
             services.AddSingleton<MainWindow>();
-            services.AddSingleton<AgoraDataContext>();
+            services.AddSingleton<AgoraDBEntities>();
 
             _serviceProvider = services.BuildServiceProvider();
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            dbContext = new AgoraDataContext();
+            dbContext = new AgoraDBEntities();
             Seeder seeder = new Seeder(dbContext);
             seeder.ClearDB();
             seeder.SeedUsers();

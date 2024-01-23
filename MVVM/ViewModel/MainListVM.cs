@@ -11,13 +11,8 @@ namespace Agora.MVVM.ViewModel
 {
     public class MainListVM : INotifyPropertyChanged
     {
-        private int _postID;
-        public int PostID { 
-            get
-            {
-                return _postID;
-            }
-        }
+        //private int _postID;
+        public int PostID { get; set; }
         public string Title { get; set; }
         public string AuthorName { get; set; }
         public string Community { get; set; }
@@ -30,9 +25,14 @@ namespace Agora.MVVM.ViewModel
             set { _voteCount = value; OnPropertyChanged(); }
         }
 
-        public MainListVM(int postID, string title, string authorName, string community, string content, DateTime postDate, int voteCount)
+        public MainListVM()
         {
-            _postID = postID;
+
+        }
+
+        public MainListVM(int postID, string title, string authorName, string community, string content, DateTime postDate, int voteCount): this()
+        {
+            PostID = postID;
             Title = title;
             AuthorName = authorName;
             Community = community;

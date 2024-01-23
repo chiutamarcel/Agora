@@ -39,8 +39,8 @@ namespace Agora.MVVM.View
 
         private void deleteAccountButton_Click(object sender, RoutedEventArgs e)
         {
-            App.dbContext.Users.DeleteOnSubmit(curUser);
-            App.dbContext.SubmitChanges();
+            App.dbContext.Users.Remove(curUser);
+            App.dbContext.SaveChanges();
             logoutButton_Click(sender, e);
         }
 
@@ -78,7 +78,7 @@ namespace Agora.MVVM.View
 
             curUser.Birthdate = (DateTime) birtdatePicker.SelectedDate;
 
-            App.dbContext.SubmitChanges();
+            App.dbContext.SaveChanges();
 
             mainWindow.CurrentPage = "MainListView.xaml";
         }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Linq;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,31 +11,34 @@ namespace Agora
 {
     public class Seeder
     {
-        AgoraDataContext dataContext;
+        AgoraDBEntities dataContext;
         List<User> users;
         List<Community> communities;
-        List<CommunitiesUser> communitiesUsers;
         List<Post> posts;
-        public Seeder(AgoraDataContext _dataContext) 
+        public Seeder(AgoraDBEntities _dataContext) 
         { 
             this.dataContext = _dataContext;
             this.users = new List<User>();
             this.communities = new List<Community>();
-            this.communitiesUsers = new List<CommunitiesUser>();
             this.posts = new List<Post>();
         }
 
         public void ClearDB()
         {
-            dataContext.CommunitiesUsers.DeleteAllOnSubmit(dataContext.CommunitiesUsers);
-            dataContext.Posts.DeleteAllOnSubmit(dataContext.Posts);
-            dataContext.Users.DeleteAllOnSubmit(dataContext.Users);
-            dataContext.Communities.DeleteAllOnSubmit(dataContext.Communities);
-            dataContext.SubmitChanges();
+            dataContext.Posts.RemoveRange(dataContext.Posts);
+            dataContext.Users.RemoveRange(dataContext.Users);
+            dataContext.Communities.RemoveRange(dataContext.Communities);
+            dataContext.SaveChanges();
         }
 
         public void SeedUsers()
         {
+            users.Add(new User(
+                "deleted",
+                "deleted",
+                "deleted",
+                DateTime.MinValue));
+
             users.Add(new User(
                 "bababui",
                 "bababui123",
@@ -83,8 +88,8 @@ namespace Agora
                 DateTime.Parse("Jun 8, 2003")
                 ));
 
-            dataContext.Users.InsertAllOnSubmit(users);
-            dataContext.SubmitChanges();
+            dataContext.Users.AddRange(users);
+            dataContext.SaveChanges();
         }
         public void SeedCommunities()
         {
@@ -95,30 +100,19 @@ namespace Agora
             communities.Add(new Community("askagora", users[random.Next(users.Count)].UserID));
             communities.Add(new Community("unexpected", users[random.Next(users.Count)].UserID));
 
-            dataContext.Communities.InsertAllOnSubmit(communities);
-            dataContext.SubmitChanges();
+            dataContext.Communities.AddRange(communities);
+            dataContext.SaveChanges();
         }
         public void AssignUsersToCommunities()
         {
+            if (communities.Count == 0) return;
+            if (users.Count == 0) return;
+
             Random random = new Random();
-            List<Tuple<int, int>> randomList = new List<Tuple<int, int>>();
-
-            for (int i = 0; i < users.Count * communities.Count / 2; i++)
+            foreach ( var user in dataContext.Users)
             {
-                for (int tryNr = 0; tryNr < 5; tryNr++)
-                {
-                    var userCommunityPair = new Tuple<int, int>(communities[random.Next(communities.Count)].CommunityID, users[random.Next(users.Count)].UserID);
-                    if (!randomList.Contains(userCommunityPair))
-                    {
-                        randomList.Add(userCommunityPair);
-                        communitiesUsers.Add(new CommunitiesUser(userCommunityPair.Item1, userCommunityPair.Item2));
-                        break;
-                    }
-                }
+                user.CommunitiesMember.Add(communities[random.Next(communities.Count)]);
             }
-
-            dataContext.CommunitiesUsers.InsertAllOnSubmit(communitiesUsers);
-            dataContext.SubmitChanges();
         }
         public void SeedPosts()
         {
@@ -159,8 +153,8 @@ namespace Agora
                 ));
             }
 
-            dataContext.Posts.InsertAllOnSubmit(posts);
-            dataContext.SubmitChanges();
+            dataContext.Posts.AddRange(posts);
+            dataContext.SaveChanges();
         }
     }
 }

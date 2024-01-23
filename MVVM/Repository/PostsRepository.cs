@@ -21,15 +21,15 @@ namespace Agora.MVVM.Repository
                                         join community in App.dbContext.Communities
                                         on post.CommunityID equals community.CommunityID
                                         select new MainListVM
-                                        (
-                                            post.PostID,
-                                            post.PostTitle,
-                                            user.Username,
-                                            community.CommunityName,
-                                            post.PostText,
-                                            (DateTime)post.PostDate,
-                                            post.VoteCount
-                                        )).ToList();
+                                        {
+                                            PostID = post.PostID,
+                                            Title = post.PostTitle,
+                                            AuthorName = user.Username,
+                                            Community = community.CommunityName,
+                                            Content = post.PostText,
+                                            PostDate = (DateTime)post.PostDate,
+                                            VoteCount = 0
+                                        }).ToList();
 
             return posts;
         }
@@ -40,8 +40,8 @@ namespace Agora.MVVM.Repository
             {
                    throw new ArgumentNullException("post");
             }
-            App.dbContext.Posts.InsertOnSubmit(post);
-            App.dbContext.SubmitChanges();  
+            App.dbContext.Posts.Add(post);
+            App.dbContext.SaveChanges();  
         }
 
         public Post GetPost(int postID)

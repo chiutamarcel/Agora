@@ -44,7 +44,7 @@ namespace Agora.MVVM.View
             Post post = (from p in App.dbContext.Posts where p.PostID == ((App)Application.Current).selectedPostID select p).First();
             post.PostTitle = PostTitle;
             post.PostText = PostContent;
-            App.dbContext.SubmitChanges();
+            App.dbContext.SaveChanges();
 
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
             mainWindow.CurrentPage = "MainListView.xaml";
