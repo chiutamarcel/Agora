@@ -83,7 +83,7 @@ namespace Agora.MVVM.View
                 return;
             }
             PostsRepository postsRepository = new PostsRepository();
-            Post post = new Post();
+            Post post = new Post();            
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
             post.AuthorID = (from u in App.dbContext.Users where u.Username == mainWindow.username select u.UserID).First();
             var community = (from c in App.dbContext.Communities where c.CommunityName == SelectedCommunity select c).First();

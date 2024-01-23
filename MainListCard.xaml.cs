@@ -1,4 +1,5 @@
-﻿using Agora.MVVM.ViewModel;
+﻿using Agora.MVVM.View;
+using Agora.MVVM.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,6 +67,14 @@ namespace Agora
 
 
             App.dbContext.SubmitChanges();
+        }
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+            ((App)Application.Current).selectedPostID = ((MainListVM)DataContext).PostID;
+          
+
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            mainWindow.CurrentPage = "EditPostView.xaml";
         }
     }
 }

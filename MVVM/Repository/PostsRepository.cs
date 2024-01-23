@@ -22,6 +22,7 @@ namespace Agora.MVVM.Repository
                                         on post.CommunityID equals community.CommunityID
                                         select new MainListVM
                                         (
+                                            post.PostID,
                                             post.PostTitle,
                                             user.Username,
                                             community.CommunityName,
@@ -41,6 +42,14 @@ namespace Agora.MVVM.Repository
             }
             App.dbContext.Posts.InsertOnSubmit(post);
             App.dbContext.SubmitChanges();  
+        }
+
+        public Post GetPost(int postID)
+        {
+            Post post = (from p in App.dbContext.Posts
+                        where p.PostID == postID
+                        select p).First();
+            return post;
         }
     }
 }

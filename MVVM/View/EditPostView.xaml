@@ -53,10 +53,10 @@
                 Style="{StaticResource MaterialDesignTextBox}"
                 Margin="10"
                 Grid.Row="0"
-                Text="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                Text="{Binding PostTitle, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                 materialDesign:HintAssist.Hint="Title"
                 materialDesign:HintAssist.IsFloating="True"
-                materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource PrimaryHueMidBrush}"
+                materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource PrimaryHueMidBrush}" 
                 />
 
             <TextBox           
@@ -68,7 +68,7 @@
                 Style="{StaticResource MaterialDesignTextBox}"
                 Margin="10"
                 Grid.Row="1"
-                Text="{Binding Content, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                Text="{Binding PostContent, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                 materialDesign:HintAssist.Hint="Content"
                 materialDesign:HintAssist.IsFloating="True"                
                 materialDesign:TextFieldAssist.HasOutlinedTextField="True"

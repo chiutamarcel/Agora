@@ -122,7 +122,8 @@
 					materialDesign:TextFieldAssist.TextFieldCornerRadius="10"
 					BorderThickness="1" />
 
-				<Button
+                <Button
+                    x:Name="Edit"
 					Grid.Column="5"
 					Width="auto"
 					Height="auto"
@@ -130,8 +131,9 @@
 					Background="Transparent"
 					Foreground="Black"
 					Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
-					ToolTip="MaterialDesignIconForegroundButton">
-					<materialDesign:PackIcon Kind="ApplicationEditOutline" />
+					ToolTip="MaterialDesignIconForegroundButton"
+					Click="Edit_Click">
+                    <materialDesign:PackIcon Kind="ApplicationEditOutline" />
 				</Button>
 
 				<Button

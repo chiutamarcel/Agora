@@ -20,6 +20,8 @@ namespace Agora
     /// </summary>
     public partial class App : Application
     {
+        public int selectedPostID { get; set;}
+
         private readonly ServiceProvider _serviceProvider;
         public static AgoraDataContext dbContext;
 
