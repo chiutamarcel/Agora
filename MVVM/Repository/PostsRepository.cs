@@ -26,6 +26,8 @@ namespace Agora.MVVM.Repository
                 VoteCount = (int)mltv.VoteCount
             }).ToList();
 
+            //foreach
+
             return posts;
         }
 
