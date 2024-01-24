@@ -1,0 +1,120 @@
+﻿<UserControl x:Class="Agora.CommentCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Agora"
+	         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+	         xmlns:viewmodel="clr-namespace:Agora.MVVM.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainListVM}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Border
+        BorderThickness="1"
+        CornerRadius="2"
+        BorderBrush="#aeea00"
+        >
+        <Grid
+            materialDesign:BottomDashedLineAdorner.Thickness="2"
+            Background="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock
+                Grid.Row="0"
+                Text="{Binding AuthorName}"
+                FontSize="15"
+                Foreground="Black"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Margin="30,10,0,10"/>
+            <Border
+                Grid.Row="1"
+                BorderBrush="#aeea00"
+                >
+                <TextBlock
+                    TextWrapping="Wrap"
+                    Text="{Binding CommentText}"
+                    FontSize="15"
+                    Foreground="Black"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Margin="10,15,10,15"/>
+            </Border>
+            <Grid Grid.Row="2" HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="10" />
+                </Grid.ColumnDefinitions>
+
+                <ToggleButton
+		            x:Name="UpVote"
+		            Grid.Column="1"
+		            Width="auto"
+		            Height="auto"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+		            Background="Green"
+		            BorderThickness="0"
+		            Content="{materialDesign:PackIcon Kind=ArrowUpBoldOutline,
+		                                              Size=21}"
+		            IsChecked="False"
+		            Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
+		            ToolTip="UpVote" />
+
+                <TextBlock
+		            x:Name="PostVoteCount"
+                    Width="50"
+		            Grid.Column="2"
+		            VerticalAlignment="Center"
+		            Text="{Binding VoteCount}"
+		            TextAlignment="Center" />
+
+                <ToggleButton
+		            x:Name="DownVote"
+		            Grid.Column="3"
+		            Width="auto"
+		            Height="auto"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+		            Background="Red"
+		            BorderThickness="0"
+		            Content="{materialDesign:PackIcon Kind=ArrowDownBoldOutline,
+		                                              Size=21}"
+		            IsChecked="False"
+		            Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
+		            ToolTip="DownVote" />
+
+                <Button
+                    x:Name="Edit"
+		            Grid.Column="5"
+		            Width="auto"
+		            Height="auto"
+		            materialDesign:ElevationAssist.Elevation="Dp0"
+		            Background="Transparent"
+		            Foreground="Black"
+                    Content="{materialDesign:PackIcon Kind=ApplicationEditOutline,Size=20}"
+		            Style="{StaticResource MaterialDesignFlatButton}">
+                </Button>
+
+                <Button
+		            Grid.Column="6"
+		            Width="auto"
+		            Height="auto"
+		            materialDesign:ElevationAssist.Elevation="Dp0"
+		            Background="Transparent"
+		            Foreground="Black"
+                    Content="{materialDesign:PackIcon Kind=DeleteEmptyOutline,Size=21}"
+		            Style="{StaticResource MaterialDesignFlatButton}">
+                </Button>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

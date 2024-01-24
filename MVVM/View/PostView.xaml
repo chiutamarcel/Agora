@@ -4,7 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"      
-      xmlns:local="clr-namespace:Agora.MVVM.View"
+      xmlns:local="clr-namespace:Agora.MVVM.View" 
+      xmlns:agora="clr-namespace:Agora"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PostView">
@@ -19,13 +20,15 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="5*"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="6*"/>
 
         </Grid.RowDefinitions>
 
         <Grid
             Grid.Row="0"
-            Grid.Column="1">
+            Grid.Column="1"
+            VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -84,31 +87,36 @@
 				    Height="auto"
 				    Background="Transparent"                    
 				    Foreground="Black"
+                    Click="Edit_Click"
                     Content="{materialDesign:PackIcon Kind=ApplicationEditOutline,Size=23}"
 				    Style="{StaticResource MaterialDesignFlatAccentButton}">
                 </Button>
                 <Separator Width="2"/>
                 <Button
+                    x:Name="Delete"
 				    Width="auto"
 				    Height="auto"
 				    Background="Transparent"
 				    Foreground="Black"
+                    Click="Delete_Click"
                     Content="{materialDesign:PackIcon Kind=DeleteEmptyOutline,Size=25}"
 				    Style="{StaticResource MaterialDesignFlatAccentButton}">
                 </Button>
                 <Separator Width="2"/>
                 <Button
+                    x:Name="Close"
                     HorizontalAlignment="Right"
                     Width="auto"
                     Height="auto"
                     Background="Transparent"
                     Foreground="Black"
+                    Click="Close_Click"
                     Content="{materialDesign:PackIcon Kind=CloseOutline,Size=25}"
                     Style="{StaticResource MaterialDesignFlatAccentButton}">
                 </Button>
             </ToolBar>
         </Grid>
-        
+
         <Grid 
             Grid.Row="1"
             Grid.Column="1">
@@ -148,8 +156,60 @@
                 TextWrapping="Wrap"            
                 />
         </GroupBox>
-        
-        
 
+        <Grid
+            Grid.Column="1"
+            Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox
+				x:Name="CommentTextBox"
+				Grid.Column="0"
+				materialDesign:HintAssist.HelperTextFontSize="16"
+				materialDesign:HintAssist.Hint="Leave a comment..."
+				materialDesign:HintAssist.HintOpacity="0.5"
+				materialDesign:TextFieldAssist.TextFieldCornerRadius="10"
+				BorderThickness="1" />
+            <Border
+                BorderThickness="2"
+                BorderBrush="#aeea00"
+                CornerRadius="10"
+                Grid.Column="1"
+                >            
+                <Button
+                    x:Name="CommentButton"
+                    Width="auto"
+                    Height="auto"
+                    Background="Transparent"
+                    Foreground="Black"
+                    Content="{materialDesign:PackIcon Kind=Send,Size=21}"
+                    Style="{StaticResource MaterialDesignFlatAccentButton}"
+                    Click="CommentButton_Click">
+                </Button>
+            </Border>
+
+        </Grid>
+
+        <ItemsControl
+            Name="commentList"
+            Margin="1"
+            Grid.Row="4"
+            Grid.Column="1"
+            Width="auto"
+            Height="auto"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            HorizontalContentAlignment="Stretch"
+            ScrollViewer.CanContentScroll="False"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            ScrollViewer.VerticalScrollBarVisibility="Disabled">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate x:Name="CommentCard">
+                    <agora:CommentCard />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </Page>

@@ -32,6 +32,8 @@ namespace Agora
         }
         public int selectedPostID { get; set;}
 
+        public int userID { get; set; }
+
         private readonly ServiceProvider _serviceProvider;
         public static AgoraDBEntities dbContext;
 

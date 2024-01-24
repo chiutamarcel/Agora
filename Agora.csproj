@@ -115,6 +115,9 @@
     <Compile Include="Comment.cs">
       <DependentUpon>AgoraDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CommentCard.xaml.cs">
+      <DependentUpon>CommentCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CommentVote.cs">
       <DependentUpon>AgoraDBModel.tt</DependentUpon>
     </Compile>
@@ -133,6 +136,10 @@
     <Compile Include="User.cs">
       <DependentUpon>AgoraDBModel.tt</DependentUpon>
     </Compile>
+    <Page Include="CommentCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainListCard.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

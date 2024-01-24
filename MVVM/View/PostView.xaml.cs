@@ -31,11 +31,29 @@ namespace Agora.MVVM.View
 
         public int PostVoteCount { get; set; }
 
+        private List<CommentCard> _comments;
+
+        public List<CommentCard> Comments
+        {
+            get { return _comments; }
+            set { _comments = value; commentList.ItemsSource = Comments; }
+        }
+
+
         public PostView()
         {
             InitializeComponent();
             DataContext = this;
             InitializeFields();
+
+            Comments = new List<CommentCard>();
+            var comments = (from c in App.dbContext.Comments where c.PostID == ((App)Application.Current).selectedPostID select c).ToList();
+            //foreach (var comment in comments)
+            //{
+            //    Comments.Add(new CommentCard(comment.CommentText, comment.CommentDate, comment.VoteCount));
+            //}
+            Comments.Add(new CommentCard("test", "test",  13));
+            Comments.Add(new CommentCard("test2", "test2xdfcghvjbknlm;,kmnjbhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh asddddddddddda asdaaaaaaaaaaaaaasf asfffffffffffffffffffffffasf  aassadas",  2));
         }
         private void InitializeFields()
         {
@@ -46,6 +64,38 @@ namespace Agora.MVVM.View
             PostContent = post.PostText;
         }
 
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            mainWindow.CurrentPage = "MainListView.xaml";
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+            ((App)Application.Current).selectedPostID = ((App)Application.Current).selectedPostID;
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            mainWindow.CurrentPage = "EditPostView.xaml";
+        }
+
+        private void CommentButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (CommentTextBox.Text != "")
+            {
+                Comment comment = new Comment();
+                CommentVote commentVote = new CommentVote();
+
+                comment.CommentText = CommentTextBox.Text;
+                comment.CommentID = App.dbContext.Comments.Count() + 1;
+                comment.AuthorID = ((App)Application.Current).userID;
+                comment.PostID = ((App)Application.Current).selectedPostID;
+                
+            }
+        }
     }
 
 }
