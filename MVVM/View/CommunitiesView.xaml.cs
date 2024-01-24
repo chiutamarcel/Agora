@@ -57,5 +57,33 @@ namespace Agora.MVVM.View
         {
             ToggleMyCommunities = false;
         }
+
+        private void CreateCommunityBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Community newCommunity = new Community();
+            newCommunity.User = App.LoggedUser;
+
+            if (NewCommunityNameBox.Text.Length == 0)
+            {
+                MessageBox.Show("Name of new community can't be empty!");
+                return;
+            }
+            if (NewCommunityNameBox.Text.Contains(" "))
+            {
+                MessageBox.Show("Name can't contain whitespaces!");
+                return;
+            }
+            if (App.dbContext.Communities.Where(c => c.CommunityName == NewCommunityNameBox.Text).Any())
+            {
+                MessageBox.Show("Community already exists!");
+                return;
+            }
+
+            newCommunity.CommunityName = NewCommunityNameBox.Text;
+            NewCommunityNameBox.Text = String.Empty;
+
+            App.dbContext.Communities.Add(newCommunity);
+            App.dbContext.SaveChanges();
+        }
     }
 }

@@ -19,15 +19,31 @@
 		</Grid.RowDefinitions>
 
 		<!--  Create Community Button  -->
-		<Button
-			x:Name="CreateCommunityBtn"
-			Grid.Row="0"
-			Width="150"
-			Height="45"
-			Margin="50,10,0,0"
-			HorizontalAlignment="Left"
-			VerticalAlignment="Top"
-			Content="Create Community" />
+		<Grid Margin="50,0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition />
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+
+			<TextBox
+				x:Name="NewCommunityNameBox"
+				Grid.Column="0"
+				Height="45"
+				Padding="0"
+				VerticalContentAlignment="Center"
+				Style="{StaticResource MaterialDesignOutlinedTextBox}"
+				TextAlignment="Center" />
+			<Button
+				x:Name="CreateCommunityBtn"
+				Grid.Row="0"
+				Grid.Column="1"
+				Height="45"
+				HorizontalAlignment="Stretch"
+				VerticalAlignment="Center"
+				Click="CreateCommunityBtn_Click"
+				Content="Create Community" />
+
+		</Grid>
 
 		<!--  My Communities / Other Communities  -->
 		<Grid Grid.Row="1" Margin="50,0">
