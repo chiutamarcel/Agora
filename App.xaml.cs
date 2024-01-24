@@ -84,12 +84,8 @@ namespace Agora
         {
             dbContext = new AgoraDBEntities();
             Seeder seeder = new Seeder(dbContext);
-            //seeder.ClearDB();
-            //seeder.Seed();
-            //seeder.SeedUsers();
-            //seeder.SeedCommunities();
-            //seeder.AssignUsersToCommunities();
-            //seeder.SeedPosts();
+            seeder.ClearDB();
+            seeder.Seed();
 
             LoggedUser = dbContext.Users.Where(u => u.Username == "deleted").First();
 

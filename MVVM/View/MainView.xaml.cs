@@ -55,22 +55,32 @@ namespace Agora
             }
         }
 
+        void UpdateChildVisibility()
+        {
+            if (App.IsLoggedIn() == true)
+            {
+                UserButton.Visibility = Visibility.Visible;
+                LogInButton.Visibility = Visibility.Hidden;
+                UserButton.DataContext = App.LoggedUser;
+                AddPostBtn.Visibility = Visibility.Visible;
+                CommunitiesBtn.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                UserButton.Visibility = Visibility.Hidden;
+                LogInButton.Visibility = Visibility.Visible;
+                AddPostBtn.Visibility = Visibility.Hidden;
+                CommunitiesBtn.Visibility = Visibility.Hidden;
+            }
+        }
+
+
         void OnUserChange(object send, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(App.LoggedUser))
             {
-                if (App.IsLoggedIn() == true)
-                {
-                    UserButton.Visibility = Visibility.Visible;
-                    LogInButton.Visibility = Visibility.Hidden;
-                    UserButton.DataContext = App.LoggedUser;
-                } 
-                else
-                {
-                    UserButton.Visibility = Visibility.Hidden;
-                    LogInButton.Visibility = Visibility.Visible;
-                }
-                
+                UpdateChildVisibility();
+
             }
             
         }
@@ -82,8 +92,7 @@ namespace Agora
             InitializeComponent();
             this.Show();
 
-            UserButton.Visibility = Visibility.Hidden;
-            LogInButton.Visibility = Visibility.Visible;
+            UpdateChildVisibility();
 
             MainContentFrame.DataContext = this;
             UserButton.DataContext = App.LoggedUser;
