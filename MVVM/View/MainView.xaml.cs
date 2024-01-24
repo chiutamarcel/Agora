@@ -43,47 +43,18 @@ namespace Agora
             set
             {
                 currentPage = value;
+                if (MainContentFrame is null)
+                {
+                    
+                } else
+                {
+                    MainContentFrame.NavigationService.Refresh();
+                }
+                
                 OnPropertyChanged();
             }
         }
 
-        //public string username;
-        //public string UserName
-        //{
-        //    get
-        //    {
-        //        return username;
-        //    }
-        //    set
-        //    {
-        //        username = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
-
-        //private bool isLoggedin;
-
-        //public bool IsLoggedin
-        //{
-        //    get { return isLoggedin; }
-        //    set
-        //    {
-        //        isLoggedin = value;
-        //        if (isLoggedin == true)
-        //        {
-        //            UserButton.Visibility = Visibility.Visible;
-        //            LogInButton.Visibility = Visibility.Hidden;
-        //        }
-        //        else
-        //        {
-        //            UserButton.Visibility = Visibility.Hidden;
-        //            LogInButton.Visibility = Visibility.Visible;
-        //        }
-        //        OnPropertyChanged();
-        //    }
-        //}
-
-        //public int UserID { get; set; }
         void OnUserChange(object send, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(App.LoggedUser))

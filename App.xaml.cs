@@ -82,8 +82,8 @@ namespace Agora
         {
             dbContext = new AgoraDBEntities();
             Seeder seeder = new Seeder(dbContext);
-            seeder.ClearDB();
-            seeder.Seed();
+            //seeder.ClearDB();
+            //seeder.Seed();
             //seeder.SeedUsers();
             //seeder.SeedCommunities();
             //seeder.AssignUsersToCommunities();

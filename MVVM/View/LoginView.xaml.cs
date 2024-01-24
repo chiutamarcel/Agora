@@ -67,13 +67,9 @@ namespace Agora.MVVM.View
                     return;
                 }
 
-                // change from the current MainWindow the value isLoggedIn to true
-                // and change the value of the current MainWindow's username to the username that was just logged in
-                // then close this window
                 if (Application.Current.MainWindow is MainWindow mainWindow)
                 {
-                    mainWindow.UserButton.Visibility = Visibility.Visible;
-                    mainWindow.LogInButton.Visibility = Visibility.Hidden;
+                    mainWindow.MainContentFrame.NavigationService.Refresh();
                 }
 
                 this.Close();

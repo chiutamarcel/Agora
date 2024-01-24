@@ -47,22 +47,6 @@ namespace Agora
             }
         }
 
-        //void OnUserChange(object send, PropertyChangedEventArgs e)
-        //{
-        //    if (App.IsLoggedIn() == true)
-        //    {
-        //        try
-        //        {
-        //        }
-        //        catch (InvalidOperationException)
-        //        {
-        //            MainListVM source = (MainListVM)DataContext;
-        //            var postSource = App.dbContext.Posts.Where(p => p.PostID == source.PostID).First();
-        //            var postVote = postSource.PostVotes.Where(pv => pv.PostID == source.PostID && pv.User.UserID == App.LoggedUser.UserID).First();
-        //        }
-        //    }
-        //}
-
         private void UpdateVoteBtns(int voteValue)
         {
             switch (voteValue)
@@ -77,12 +61,13 @@ namespace Agora
                     break;
                 case -1:
                     UpVote.IsChecked = false;
-                    DownVote.IsChecked = false;
+                    DownVote.IsChecked = true;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
+
 
         private void UpVote_Click(object sender, RoutedEventArgs e)
         {
@@ -93,7 +78,6 @@ namespace Agora
 
             if (App.IsLoggedIn() == false)
             {
-                
                 App.ShowRegister();
                 return;
             }
@@ -154,7 +138,6 @@ namespace Agora
             source.VoteCount -= postVote.VoteValue;
             if (postVote.VoteValue == 1 || postVote.VoteValue == 0)
             {
-                
                 postVote.VoteValue = -1;
             }
             else

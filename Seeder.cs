@@ -207,7 +207,7 @@ namespace Agora
             SeedCommunities();
             AssignUsersToCommunities();
             SeedPosts();
-            SeedPostVotes();
+            //SeedPostVotes();
             SeedComments();
         }
     }
