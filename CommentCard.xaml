@@ -33,16 +33,19 @@
                 Grid.Row="1"
                 BorderBrush="#aeea00"
                 >
-                <TextBlock
+                <TextBox
+                    HorizontalAlignment="Stretch"
                     TextWrapping="Wrap"
                     Text="{Binding CommentText}"
                     FontSize="15"
                     Foreground="Black"
-                    HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-                    Margin="10,15,10,15"/>
+                    Margin="10,15,10,15"
+                    IsInactiveSelectionHighlightEnabled="False"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    IsReadOnly="{Binding CanOnlyRead}"/>
             </Border>
-            <Grid Grid.Row="2" HorizontalAlignment="Left">
+            <Grid x:Name="CommentToolbar" Grid.Row="2" HorizontalAlignment="Stretch" Margin="0 0 0 10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="10" />
                     <ColumnDefinition Width="auto" />
@@ -50,6 +53,8 @@
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="10" />
                 </Grid.ColumnDefinitions>
@@ -100,7 +105,7 @@
 		            materialDesign:ElevationAssist.Elevation="Dp0"
 		            Background="Transparent"
 		            Foreground="Black"
-                    Click="CommentEdit_Click"
+                    Click="CommentEdit_Click"                   
                     Content="{materialDesign:PackIcon Kind=ApplicationEditOutline,Size=20}"
 		            Style="{StaticResource MaterialDesignFlatButton}">
                 </Button>
@@ -116,6 +121,20 @@
                     Click="CommentDelete_Click"
                     Content="{materialDesign:PackIcon Kind=DeleteEmptyOutline,Size=21}"
 		            Style="{StaticResource MaterialDesignFlatButton}">
+                </Button>
+                <Button
+                    x:Name="CommentSave"
+                    Grid.Column="8"
+                    Width="auto"
+                    Height="auto"
+                    materialDesign:ElevationAssist.Elevation="Dp0"
+                    Background="Transparent"
+                    Foreground="Black"
+                    Click="CommentSave_Click"
+                    Content="{materialDesign:PackIcon Kind=CheckOutline,Size=21}"
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    ToolTip="Save comment"
+                    Visibility="{Binding IsEditing}">
                 </Button>
             </Grid>
         </Grid>
