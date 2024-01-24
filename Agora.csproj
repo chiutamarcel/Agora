@@ -127,9 +127,6 @@
     <Compile Include="PostVote.cs">
       <DependentUpon>AgoraDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>AgoraDBModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="User.cs">
       <DependentUpon>AgoraDBModel.tt</DependentUpon>
     </Compile>

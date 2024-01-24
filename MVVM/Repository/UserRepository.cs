@@ -42,6 +42,11 @@ namespace Agora.MVVM.Services
         {
             int id = (from u in App.dbContext.Users where u.Username == username && u.UserPassword == password select u.UserID).FirstOrDefault();
 
+            if (id != 0)
+            {
+                App.LoggedUser = App.dbContext.Users.Where(u => u.UserID == id).First();
+            }
+
             return id;
         }
 

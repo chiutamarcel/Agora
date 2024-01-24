@@ -70,12 +70,6 @@ namespace Agora.MVVM.View
             {
                 int userId = userRepository.RegisterUser(user);
                 MessageBox.Show("Registration successful!");
-                if (Application.Current.MainWindow is MainWindow mainWindow)
-                {
-                    mainWindow.IsLoggedin= true;
-                    mainWindow.UserName = Username.Text;
-                    mainWindow.UserID = (int)userId;
-                }
                 this.Close();
             }
             catch (Exception exc)

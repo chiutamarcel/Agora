@@ -85,7 +85,7 @@ namespace Agora.MVVM.View
             PostsRepository postsRepository = new PostsRepository();
             Post post = new Post();            
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-            post.AuthorID = (from u in App.dbContext.Users where u.Username == mainWindow.username select u.UserID).First();
+            post.AuthorID = App.LoggedUser.UserID;
             var community = (from c in App.dbContext.Communities where c.CommunityName == SelectedCommunity select c).First();
             post.CommunityID = community.CommunityID;
             post.PostTitle = PostTitle.Text;
@@ -104,8 +104,7 @@ namespace Agora.MVVM.View
 
         private void InitializeCommunities()
         {
-            var loggedUser = App.dbContext.Users.Where(u => u.Username == ((MainWindow)Application.Current.MainWindow).username).First();
-            var communities = loggedUser.CommunitiesMember.ToList();
+            var communities = App.LoggedUser.CommunitiesMember.ToList();
 
             Communities = new ObservableCollection<string>();
             

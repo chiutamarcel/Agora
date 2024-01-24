@@ -89,10 +89,5 @@ namespace Agora.MVVM.View
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        private void GetPostsFromDB()
-        {
-            Posts = postsRepository.GetPostsList();
-        }
     }
 }

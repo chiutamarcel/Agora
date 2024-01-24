@@ -10,7 +10,6 @@
         <EntityTypeShape EntityType="AgoraDBModel.Community" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="AgoraDBModel.Post" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="AgoraDBModel.PostVote" Width="1.5" PointX="7.5" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="AgoraDBModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AgoraDBModel.User" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
         <AssociationConnector Association="AgoraDBModel.FK_Comments_AuthorID" ManuallyRouted="false" />
         <AssociationConnector Association="AgoraDBModel.FK_Comments_PostID" ManuallyRouted="false" />

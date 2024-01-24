@@ -2,6 +2,7 @@
 using Agora.MVVM.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,47 +26,148 @@ namespace Agora
         public MainListCard()
         {
             InitializeComponent();
+            this.Loaded += MainListCard_Loaded;
+        }
+
+        void MainListCard_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (App.IsLoggedIn() == true)
+            {
+                try
+                {
+                    MainListVM source = (MainListVM)DataContext;
+                    var postSource = App.dbContext.Posts.Where(p => p.PostID == source.PostID).First();
+                    var postVote = postSource.PostVotes.Where(pv => pv.PostID == source.PostID && pv.User.UserID == App.LoggedUser.UserID).First();
+                    UpdateVoteBtns(postVote.VoteValue);
+                }
+                catch (InvalidOperationException)
+                {
+
+                }
+            }
+        }
+
+        //void OnUserChange(object send, PropertyChangedEventArgs e)
+        //{
+        //    if (App.IsLoggedIn() == true)
+        //    {
+        //        try
+        //        {
+        //        }
+        //        catch (InvalidOperationException)
+        //        {
+        //            MainListVM source = (MainListVM)DataContext;
+        //            var postSource = App.dbContext.Posts.Where(p => p.PostID == source.PostID).First();
+        //            var postVote = postSource.PostVotes.Where(pv => pv.PostID == source.PostID && pv.User.UserID == App.LoggedUser.UserID).First();
+        //        }
+        //    }
+        //}
+
+        private void UpdateVoteBtns(int voteValue)
+        {
+            switch (voteValue)
+            {
+                case 1:
+                    UpVote.IsChecked = true;
+                    DownVote.IsChecked = false;
+                    break;
+                case 0:
+                    UpVote.IsChecked = false;
+                    DownVote.IsChecked = false;
+                    break;
+                case -1:
+                    UpVote.IsChecked = false;
+                    DownVote.IsChecked = false;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         private void UpVote_Click(object sender, RoutedEventArgs e)
         {
-            //MainListVM source = DataContext as MainListVM;
-            //var postSource = (from p in App.dbContext.Posts where p.PostTitle == source.Title select p).First();
+            UpVote.IsChecked = false;
+            MainListVM source = DataContext as MainListVM;
+            var postSource = (from p in App.dbContext.Posts where p.PostTitle == source.Title select p).First();
+            PostVote postVote;
 
-            //if (UpVote.IsChecked == true)
-            //{
-            //    // TODO : ADD UPVOTE
+            if (App.IsLoggedIn() == false)
+            {
+                
+                App.ShowRegister();
+                return;
+            }
 
+            try
+            {
+                postVote = postSource.PostVotes.Where(pv => pv.User.UserID == App.LoggedUser.UserID && pv.PostID == postSource.PostID).First();
+            }
+            catch (InvalidOperationException)
+            {
+                postVote = new PostVote();
+                postVote.User = App.LoggedUser;
+                postVote.Post = postSource;
+                postSource.PostVotes.Add(postVote);
+            }
 
-            //    DownVote.IsChecked = false;
-            //} 
-            //else
-            //{
-            //    // TODO : ADD UPVOTE
-            //}
+            source.VoteCount -= postVote.VoteValue;
+            if (postVote.VoteValue == -1 || postVote.VoteValue == 0)
+            {
+                postVote.VoteValue = 1;
+            } 
+            else
+            {
+                postVote.VoteValue = 0;
+            }
+            source.VoteCount += postVote.VoteValue;
 
-            //App.dbContext.SubmitChanges();
+            UpdateVoteBtns(postVote.VoteValue);
+
+            App.dbContext.SaveChanges();
         }
 
         private void DownVote_Click(object sender, RoutedEventArgs e)
         {
-            //MainListVM source = DataContext as MainListVM;
-            //var postSource = (from p in App.dbContext.Posts where p.PostTitle == source.Title select p).First();
+            DownVote.IsChecked = false;
+            MainListVM source = DataContext as MainListVM;
+            var postSource = (from p in App.dbContext.Posts where p.PostTitle == source.Title select p).First();
+            PostVote postVote;
 
-            //if (DownVote.IsChecked == true)
-            //{
-            //    source.VoteCount--;
-            //    postSource.VoteCount--;
-            //    UpVote.IsChecked = false;
-            //} else
-            //{
-            //    source.VoteCount++;
-            //    postSource.VoteCount++;
-            //}
+            if (App.IsLoggedIn() == false)
+            {
+                App.ShowRegister();
+                return;
+            }
 
+            try
+            {
+                postVote = postSource.PostVotes.Where(pv => pv.User.UserID == App.LoggedUser.UserID && pv.PostID == postSource.PostID).First();
+            }
+            catch (InvalidOperationException)
+            {
+                postVote = new PostVote();
+                postVote.User = App.LoggedUser;
+                postVote.Post = postSource;
+                postSource.PostVotes.Add(postVote);
+            }
 
-            //App.dbContext.SubmitChanges();
+            source.VoteCount -= postVote.VoteValue;
+            if (postVote.VoteValue == 1 || postVote.VoteValue == 0)
+            {
+                
+                postVote.VoteValue = -1;
+            }
+            else
+            {
+                postVote.VoteValue = 0;
+            }
+            source.VoteCount += postVote.VoteValue;
+
+            UpdateVoteBtns(postVote.VoteValue);
+
+            App.dbContext.SaveChanges();
         }
+
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
             ((App)Application.Current).selectedPostID = ((MainListVM)DataContext).PostID;

@@ -25,9 +25,13 @@ namespace Agora
 
         public void ClearDB()
         {
+            dataContext.CommentVotes.RemoveRange(dataContext.CommentVotes);
+            dataContext.PostVotes.RemoveRange(dataContext.PostVotes);
+            dataContext.Comments.RemoveRange(dataContext.Comments);
             dataContext.Posts.RemoveRange(dataContext.Posts);
-            dataContext.Users.RemoveRange(dataContext.Users);
             dataContext.Communities.RemoveRange(dataContext.Communities);
+            dataContext.Users.RemoveRange(dataContext.Users);
+
             dataContext.SaveChanges();
         }
 
@@ -155,6 +159,56 @@ namespace Agora
 
             dataContext.Posts.AddRange(posts);
             dataContext.SaveChanges();
+        }
+        public void SeedComments()
+        {
+            if (users.Count() == 0 || posts.Count == 0) return;
+
+            Random random = new Random();
+            string[] texts = { "Acest post nu este folositor", "M-am simtit ofensat", "Sunt de acord cu el" };
+
+            for (int i = 0; i < 5; i++)
+            {
+                var user = users[random.Next(users.Count())];
+                var post = posts[random.Next(posts.Count())];
+                int textIndex = random.Next(texts.Count());
+
+                Comment comment = new Comment { User = user, Post = post, CommentText = texts[textIndex] };
+                dataContext.Comments.Add(comment);
+            }
+
+            dataContext.SaveChanges();
+        }
+
+        public void SeedPostVotes()
+        {
+            Random random = new Random();
+
+            for(int i = 0; i < posts.Count; i++)
+            {
+                for (int j = 0; j < users.Count - j; j++)
+                {
+
+                    PostVote postVote = new PostVote();
+                    postVote.User = users[j];
+                    postVote.Post = posts[i];
+                    postVote.VoteValue = random.Next(-1, 1);
+
+                    dataContext.PostVotes.Add(postVote);
+                }
+            }
+
+            dataContext.SaveChanges();
+        }
+
+        public void Seed()
+        {
+            SeedUsers();
+            SeedCommunities();
+            AssignUsersToCommunities();
+            SeedPosts();
+            SeedPostVotes();
+            SeedComments();
         }
     }
 }

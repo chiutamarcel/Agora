@@ -23,23 +23,22 @@ namespace Agora.MVVM.View
     public partial class UserSettingsView : Page
     {
         MainWindow mainWindow;
-        User curUser;
         public UserSettingsView()
         {
             InitializeComponent();
             mainWindow = (MainWindow)Application.Current.MainWindow;
-            DataContext = curUser = (from usr in App.dbContext.Users where usr.UserID == mainWindow.UserID select usr).First();
+            DataContext = App.LoggedUser;
         }
 
         private void logoutButton_Click(object sender, RoutedEventArgs e)
         {
-            mainWindow.IsLoggedin = false;
+            App.LoggedUser = App.dbContext.Users.Where(u => u.Username == "deleted").First();
             mainWindow.CurrentPage = "MainListView.xaml";
         }
 
         private void deleteAccountButton_Click(object sender, RoutedEventArgs e)
         {
-            App.dbContext.Users.Remove(curUser);
+            App.dbContext.Users.Remove(App.LoggedUser);
             App.dbContext.SaveChanges();
             logoutButton_Click(sender, e);
         }
@@ -70,13 +69,13 @@ namespace Agora.MVVM.View
                     return;
                 }
 
-                curUser.UserPassword = passwordBox.Password;
+                App.LoggedUser.UserPassword = passwordBox.Password;
             }
 
-            curUser.Username = userNameTextBox.Text;
-            curUser.UserEmail = emailTextBox.Text;
+            App.LoggedUser.Username = userNameTextBox.Text;
+            App.LoggedUser.UserEmail = emailTextBox.Text;
 
-            curUser.Birthdate = (DateTime) birtdatePicker.SelectedDate;
+            App.LoggedUser.Birthdate = (DateTime) birtdatePicker.SelectedDate;
 
             App.dbContext.SaveChanges();
 

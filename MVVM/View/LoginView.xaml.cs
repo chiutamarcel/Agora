@@ -72,9 +72,6 @@ namespace Agora.MVVM.View
                 // then close this window
                 if (Application.Current.MainWindow is MainWindow mainWindow)
                 {
-                    mainWindow.IsLoggedin = true;
-                    mainWindow.UserID = (int)userId;
-                    mainWindow.UserName = Username.Text;
                     mainWindow.UserButton.Visibility = Visibility.Visible;
                     mainWindow.LogInButton.Visibility = Visibility.Hidden;
                 }

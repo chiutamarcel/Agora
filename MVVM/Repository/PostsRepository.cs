@@ -31,6 +31,8 @@ namespace Agora.MVVM.Repository
                                             VoteCount = 0
                                         }).ToList();
 
+            //foreach
+
             return posts;
         }
 

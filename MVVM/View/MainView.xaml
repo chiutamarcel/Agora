@@ -101,7 +101,7 @@
 				Click="userBtn_Click"
 				FontSize="22"
 				Style="{StaticResource MaterialDesignFlatDarkButton}">
-				<TextBlock Text="{Binding UserName}" />
+				<TextBlock Text="{Binding Username}" />
 			</Button>
 			<!--  LogIn button  -->
 			<Button

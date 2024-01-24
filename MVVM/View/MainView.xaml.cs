@@ -47,50 +47,66 @@ namespace Agora
             }
         }
 
-        public string username;
-        public string UserName
-        {
-            get
-            {
-                return username;
-            }
-            set
-            {
-                username = value;
-                OnPropertyChanged();
-            }
-        }
+        //public string username;
+        //public string UserName
+        //{
+        //    get
+        //    {
+        //        return username;
+        //    }
+        //    set
+        //    {
+        //        username = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
 
-        private bool isLoggedin;
+        //private bool isLoggedin;
 
-        public bool IsLoggedin
+        //public bool IsLoggedin
+        //{
+        //    get { return isLoggedin; }
+        //    set
+        //    {
+        //        isLoggedin = value;
+        //        if (isLoggedin == true)
+        //        {
+        //            UserButton.Visibility = Visibility.Visible;
+        //            LogInButton.Visibility = Visibility.Hidden;
+        //        }
+        //        else
+        //        {
+        //            UserButton.Visibility = Visibility.Hidden;
+        //            LogInButton.Visibility = Visibility.Visible;
+        //        }
+        //        OnPropertyChanged();
+        //    }
+        //}
+
+        //public int UserID { get; set; }
+        void OnUserChange(object send, PropertyChangedEventArgs e)
         {
-            get { return isLoggedin; }
-            set
+            if (e.PropertyName == nameof(App.LoggedUser))
             {
-                isLoggedin = value;
-                if (isLoggedin == true)
+                if (App.IsLoggedIn() == true)
                 {
                     UserButton.Visibility = Visibility.Visible;
                     LogInButton.Visibility = Visibility.Hidden;
-                }
+                    UserButton.DataContext = App.LoggedUser;
+                } 
                 else
                 {
                     UserButton.Visibility = Visibility.Hidden;
                     LogInButton.Visibility = Visibility.Visible;
                 }
-                OnPropertyChanged();
+                
             }
+            
         }
-
-        public int UserID { get; set; }
 
         public MainWindow()
         {
-            isLoggedin = false;
-
             CurrentPage = "MainListView.xaml";
-            UserName = "Bababui";
 
             InitializeComponent();
             this.Show();
@@ -99,7 +115,13 @@ namespace Agora
             LogInButton.Visibility = Visibility.Visible;
 
             MainContentFrame.DataContext = this;
-            UserButton.DataContext = this;
+            UserButton.DataContext = App.LoggedUser;
+            App.Instance.PropertyChanged += OnUserChange;
+        }
+
+        ~MainWindow()
+        {
+            App.Instance.PropertyChanged -= OnUserChange;
         }
 
 
@@ -159,7 +181,16 @@ namespace Agora
                     where post.PostTitle.ToLower().Contains(searchText.ToLower())  ||
                             post.PostText.ToLower().Contains(searchText.ToLower()) ||
                             user.Username.ToLower().Contains(searchText.ToLower())
-                    select new MainListVM(post.PostID, post.PostTitle, user.Username, community.CommunityName, post.PostText, (DateTime)post.PostDate, 0)
+                    select new MainListVM
+                    {
+                        PostID = post.PostID,
+                        Title = post.PostTitle,
+                        AuthorName = user.Username,
+                        Community = community.CommunityName,
+                        Content = post.PostText,
+                        PostDate = (DateTime)post.PostDate,
+                        VoteCount = 0
+                    }
                 )
                 .ToList();
 
