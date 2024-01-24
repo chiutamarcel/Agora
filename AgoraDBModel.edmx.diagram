@@ -21,6 +21,7 @@
         <AssociationConnector Association="AgoraDBModel.FK_Votes_PostID" ManuallyRouted="false" />
         <AssociationConnector Association="AgoraDBModel.FK_Votes_AuthorID" ManuallyRouted="false" />
         <AssociationConnector Association="AgoraDBModel.CommunitiesUsers" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="AgoraDBModel.MainListTV" Width="1.5" PointX="5.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

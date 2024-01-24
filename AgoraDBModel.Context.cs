@@ -31,5 +31,6 @@ namespace Agora
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<PostVote> PostVotes { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<MainListTV> MainListTVs { get; set; }
     }
 }

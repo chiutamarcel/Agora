@@ -15,23 +15,16 @@ namespace Agora.MVVM.Repository
 
         public List<MainListVM> GetPostsList()
         {
-            List<MainListVM> posts =    (from post in App.dbContext.Posts
-                                        join user in App.dbContext.Users
-                                        on post.AuthorID equals user.UserID
-                                        join community in App.dbContext.Communities
-                                        on post.CommunityID equals community.CommunityID
-                                        select new MainListVM
-                                        {
-                                            PostID = post.PostID,
-                                            Title = post.PostTitle,
-                                            AuthorName = user.Username,
-                                            Community = community.CommunityName,
-                                            Content = post.PostText,
-                                            PostDate = (DateTime)post.PostDate,
-                                            VoteCount = 0
-                                        }).ToList();
-
-            //foreach
+            List<MainListVM> posts = App.dbContext.MainListTVs.ToList().Select(mltv => new MainListVM 
+            {
+                PostID = mltv.PostID,
+                Title = mltv.PostTitle,
+                AuthorName = mltv.Username,
+                Community = mltv.CommunityName,
+                Content = mltv.PostText,
+                PostDate = (DateTime)mltv.PostDate,
+                VoteCount = (int)mltv.VoteCount
+            }).ToList();
 
             return posts;
         }

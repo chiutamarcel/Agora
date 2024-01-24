@@ -74,6 +74,22 @@ warning 6002: The table/view 'AgoraDB.dbo.CommentVotes' does not have a primary 
           <Property Name="UserEmail" Type="varchar" MaxLength="50" />
           <Property Name="Birthdate" Type="date" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AgoraDB.dbo.MainListTV' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="MainListTV">
+          <Key>
+            <PropertyRef Name="PostID" />
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="CommunityName" />
+          </Key>
+          <Property Name="PostID" Type="int" Nullable="false" />
+          <Property Name="PostTitle" Type="varchar" MaxLength="50" />
+          <Property Name="Username" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CommunityName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="PostText" Type="varchar" MaxLength="500" />
+          <Property Name="PostDate" Type="date" />
+          <Property Name="VoteCount" Type="int" />
+        </EntityType>
         <Association Name="FK__Posts__Community__4BAC3F29">
           <End Role="Communities" Type="Self.Communities" Multiplicity="0..1" />
           <End Role="Posts" Type="Self.Posts" Multiplicity="*" />
@@ -224,6 +240,17 @@ warning 6002: The table/view 'AgoraDB.dbo.CommentVotes' does not have a primary 
     [CommentVotes].[UserID] AS [UserID], 
     [CommentVotes].[VoteValue] AS [VoteValue]
     FROM [dbo].[CommentVotes] AS [CommentVotes]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="MainListTV" EntityType="Self.MainListTV" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [MainListTV].[PostID] AS [PostID], 
+    [MainListTV].[PostTitle] AS [PostTitle], 
+    [MainListTV].[Username] AS [Username], 
+    [MainListTV].[CommunityName] AS [CommunityName], 
+    [MainListTV].[PostText] AS [PostText], 
+    [MainListTV].[PostDate] AS [PostDate], 
+    [MainListTV].[VoteCount] AS [VoteCount]
+    FROM [dbo].[MainListTV] AS [MainListTV]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK__Posts__Community__4BAC3F29" Association="Self.FK__Posts__Community__4BAC3F29">
             <End Role="Communities" EntitySet="Communities" />
@@ -509,7 +536,22 @@ warning 6002: The table/view 'AgoraDB.dbo.CommentVotes' does not have a primary 
             <End Role="Communities" EntitySet="Communities" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="MainListTVs" EntityType="AgoraDBModel.MainListTV" />
         </EntityContainer>
+        <EntityType Name="MainListTV">
+          <Key>
+            <PropertyRef Name="PostID" />
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="CommunityName" />
+          </Key>
+          <Property Name="PostID" Type="Int32" Nullable="false" />
+          <Property Name="PostTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CommunityName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PostText" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="PostDate" Type="DateTime" Precision="0" />
+          <Property Name="VoteCount" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -586,6 +628,19 @@ warning 6002: The table/view 'AgoraDB.dbo.CommentVotes' does not have a primary 
               <ScalarProperty Name="UserID" ColumnName="UserID" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="MainListTVs">
+            <EntityTypeMapping TypeName="AgoraDBModel.MainListTV">
+              <MappingFragment StoreEntitySet="MainListTV">
+                <ScalarProperty Name="VoteCount" ColumnName="VoteCount" />
+                <ScalarProperty Name="PostDate" ColumnName="PostDate" />
+                <ScalarProperty Name="PostText" ColumnName="PostText" />
+                <ScalarProperty Name="CommunityName" ColumnName="CommunityName" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="PostTitle" ColumnName="PostTitle" />
+                <ScalarProperty Name="PostID" ColumnName="PostID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

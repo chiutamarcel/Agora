@@ -173,23 +173,19 @@ namespace Agora
 
             content.Posts =
                 (
-                    from post in App.dbContext.Posts
-                    join user in App.dbContext.Users
-                    on post.AuthorID equals user.UserID
-                    join community in App.dbContext.Communities
-                    on post.CommunityID equals community.CommunityID
-                    where post.PostTitle.ToLower().Contains(searchText.ToLower())  ||
-                            post.PostText.ToLower().Contains(searchText.ToLower()) ||
-                            user.Username.ToLower().Contains(searchText.ToLower())
+                    from mltv in App.dbContext.MainListTVs
+                    where mltv.PostTitle.ToLower().Contains(searchText.ToLower()) ||
+                            mltv.PostText.ToLower().Contains(searchText.ToLower()) ||
+                            mltv.Username.ToLower().Contains(searchText.ToLower())
                     select new MainListVM
                     {
-                        PostID = post.PostID,
-                        Title = post.PostTitle,
-                        AuthorName = user.Username,
-                        Community = community.CommunityName,
-                        Content = post.PostText,
-                        PostDate = (DateTime)post.PostDate,
-                        VoteCount = 0
+                        PostID = mltv.PostID,
+                        Title = mltv.PostTitle,
+                        AuthorName = mltv.Username,
+                        Community = mltv.CommunityName,
+                        Content = mltv.PostText,
+                        PostDate = (DateTime)mltv.PostDate,
+                        VoteCount = (int)mltv.VoteCount
                     }
                 )
                 .ToList();

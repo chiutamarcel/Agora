@@ -121,6 +121,9 @@
     <Compile Include="Community.cs">
       <DependentUpon>AgoraDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="MainListTV.cs">
+      <DependentUpon>AgoraDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Post.cs">
       <DependentUpon>AgoraDBModel.tt</DependentUpon>
     </Compile>
