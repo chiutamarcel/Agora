@@ -20,9 +20,43 @@ namespace Agora.MVVM.View
     /// </summary>
     public partial class CommunitiesView : Page
     {
+        bool toggleMyCommunities;
+        bool ToggleMyCommunities
+        {
+            get
+            {
+                return toggleMyCommunities;
+            }
+            set
+            {
+                toggleMyCommunities = value;
+
+                if (toggleMyCommunities == true)
+                {
+                    CommunitiesItemsControl.ItemsSource = App.LoggedUser.CommunitiesMember.ToList();
+                } 
+                else
+                {
+                    CommunitiesItemsControl.ItemsSource = App.dbContext.Communities.ToList().Where(c => !(c.Users.Contains((User) App.LoggedUser)) ).ToList();
+                }
+            }
+        }
         public CommunitiesView()
         {
             InitializeComponent();
+
+            //CommunitiesItemsControl.ItemsSource = App.dbContext.Communities.ToList();
+            ToggleMyCommunities = false;
+        }
+
+        private void MyCommunitiesBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ToggleMyCommunities = true;
+        }
+
+        private void OtherCommunitiesBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ToggleMyCommunities = false;
         }
     }
 }

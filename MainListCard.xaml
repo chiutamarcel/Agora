@@ -19,15 +19,15 @@
 			Width="auto"
 			Margin="0"
 			Background="Transparent">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="25" />
-                <RowDefinition Height="35" />
-                <RowDefinition Height="70" />
-                <RowDefinition Height="30" />
-                <!--<RowDefinition Height="5" />-->
-            </Grid.RowDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="25" />
+				<RowDefinition Height="35" />
+				<RowDefinition Height="70" />
+				<RowDefinition Height="30" />
+				<!--<RowDefinition Height="5" />-->
+			</Grid.RowDefinitions>
 
-            <Grid Grid.Row="0" HorizontalAlignment="Stretch">
+			<Grid Grid.Row="0" HorizontalAlignment="Stretch">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*" />
 					<ColumnDefinition Width="*" />
@@ -57,29 +57,28 @@
 				FontSize="21"
 				FontWeight="Bold"
 				Text="{Binding Title}" />
-			
-            <TextBlock
+
+			<TextBlock
 				Grid.Row="2"
 				HorizontalAlignment="Stretch"
 				FontSize="16"
 				Text="{Binding Content}"
 				TextAlignment="Left"
 				TextTrimming="CharacterEllipsis"
-				TextWrapping="Wrap" 
-                />
+				TextWrapping="Wrap" />
 
-            <Button
-                x:Name="OpenPost"
-                Grid.Row="0"
-                Grid.RowSpan="3"
-                Background="Transparent"
-                BorderThickness="0"
-                Height="130"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"                
-                Click="OpenPost_Click"/>
-            
-            <!--<Separator Grid.Row="3"/>-->
+			<Button
+				x:Name="OpenPost"
+				Grid.Row="0"
+				Grid.RowSpan="3"
+				Height="130"
+				HorizontalAlignment="Stretch"
+				VerticalAlignment="Stretch"
+				Background="Transparent"
+				BorderThickness="0"
+				Click="OpenPost_Click" />
+
+			<!--<Separator Grid.Row="3"/>-->
 			<Grid Grid.Row="3" HorizontalAlignment="Stretch">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="10" />
@@ -136,18 +135,18 @@
 					materialDesign:TextFieldAssist.TextFieldCornerRadius="10"
 					BorderThickness="1" />
 
-                <Button
-                    x:Name="Edit"
+				<Button
+					x:Name="Edit"
 					Grid.Column="5"
 					Width="auto"
 					Height="auto"
 					materialDesign:ElevationAssist.Elevation="Dp0"
 					Background="Transparent"
+					Click="Edit_Click"
 					Foreground="Black"
 					Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
-					ToolTip="MaterialDesignIconForegroundButton"
-					Click="Edit_Click">
-                    <materialDesign:PackIcon Kind="ApplicationEditOutline" />
+					ToolTip="MaterialDesignIconForegroundButton">
+					<materialDesign:PackIcon Kind="ApplicationEditOutline" />
 				</Button>
 
 				<Button

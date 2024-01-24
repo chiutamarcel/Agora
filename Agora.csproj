@@ -124,6 +124,9 @@
     <Compile Include="Community.cs">
       <DependentUpon>AgoraDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CommunityCard.xaml.cs">
+      <DependentUpon>CommunityCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainListTV.cs">
       <DependentUpon>AgoraDBModel.tt</DependentUpon>
     </Compile>
@@ -140,6 +143,10 @@
       <DependentUpon>AgoraDBModel.tt</DependentUpon>
     </Compile>
     <Page Include="CommentCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CommunityCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
