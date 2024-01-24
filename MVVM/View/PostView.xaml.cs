@@ -69,9 +69,7 @@ namespace Agora.MVVM.View
                 var user = (from u in App.dbContext.Users where u.UserID == comment.AuthorID select u).First();
                 Comments.Add(new CommentCard(user.Username, comment.CommentText, 0));
             }
-            Comments.Add(new CommentCard("test", "test",  13));
-            Comments.Add(new CommentCard("test2", "test2xdfcghvjbknlm;,kmnjbhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh asddddddddddda asdaaaaaaaaaaaaaasf asfffffffffffffffffffffffasf  aassadas",  2));
-        }
+         }
         private void InitializeFields()
         {
             Post post = (from p in App.dbContext.Posts where p.PostID == ((App)Application.Current).selectedPostID select p).First();
@@ -89,11 +87,38 @@ namespace Agora.MVVM.View
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-
+            if(App.IsLoggedIn() == false)
+            {
+                MessageBox.Show("You must be logged in to delete posts");
+                App.ShowRegister();
+                return;
+            }
+            Post post = (from p in App.dbContext.Posts where p.PostID == ((App)Application.Current).selectedPostID select p).First();
+            if(post.AuthorID != App.LoggedUser.UserID)
+            {
+                MessageBox.Show("You can only delete your own posts");
+                return;
+            }
+            App.dbContext.Posts.Remove(post);
+            App.dbContext.SaveChanges();
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            mainWindow.CurrentPage = "MainListView.xaml";
         }
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
+            if(App.IsLoggedIn() == false)
+            {
+                MessageBox.Show("You must be logged in to edit posts");
+                App.ShowRegister();
+                return;
+            }
+            Post post = (from p in App.dbContext.Posts where p.PostID == ((App)Application.Current).selectedPostID select p).First();
+            if(post.AuthorID != App.LoggedUser.UserID)
+            {
+                MessageBox.Show("You can only edit your own posts");
+                return;
+            }
             ((App)Application.Current).selectedPostID = ((App)Application.Current).selectedPostID;
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
             mainWindow.CurrentPage = "EditPostView.xaml";
@@ -101,6 +126,13 @@ namespace Agora.MVVM.View
 
         private void CommentButton_Click(object sender, RoutedEventArgs e)
         {
+            if(App.IsLoggedIn() == false)
+            {
+                MessageBox.Show("You must be logged in to comment");
+                CommentTextBox.Text = "";
+                App.ShowRegister();
+                return;
+            }
             if (CommentTextBox.Text != "")
             {
                 Comment comment = new Comment();
@@ -110,13 +142,10 @@ namespace Agora.MVVM.View
                 comment.PostID = ((App)Application.Current).selectedPostID;
                 
                 App.dbContext.Comments.Add(comment);
-
                 App.dbContext.SaveChanges();
-
                 CommentTextBox.Text = "";
                 
                 Comments.Insert(0, new CommentCard(App.LoggedUser.Username, comment.CommentText, 0));
-
                 commentList.Items.Refresh();
             }
         }
