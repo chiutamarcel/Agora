@@ -30,6 +30,7 @@
 				Padding="0"
 				VerticalAlignment="Stretch"
 				Background="{StaticResource PrimaryHueMidBrush}"
+				Click="joinBtn_Click"
 				Visibility="Visible">
 				Join
 			</Button>
@@ -41,6 +42,7 @@
 				Padding="0"
 				VerticalAlignment="Stretch"
 				Background="{StaticResource SecondaryHueMidBrush}"
+				Click="leaveBtn_Click"
 				Visibility="Hidden">
 				Leave
 			</Button>

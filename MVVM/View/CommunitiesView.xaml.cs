@@ -45,8 +45,7 @@ namespace Agora.MVVM.View
         {
             InitializeComponent();
 
-            //CommunitiesItemsControl.ItemsSource = App.dbContext.Communities.ToList();
-            ToggleMyCommunities = false;
+            ToggleMyCommunities = true;
         }
 
         private void MyCommunitiesBtn_Click(object sender, RoutedEventArgs e)
