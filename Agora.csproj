@@ -127,6 +127,9 @@
     <Compile Include="MainListTV.cs">
       <DependentUpon>AgoraDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="MVVM\View\CommunitiesView.xaml.cs">
+      <DependentUpon>CommunitiesView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Post.cs">
       <DependentUpon>AgoraDBModel.tt</DependentUpon>
     </Compile>
@@ -145,6 +148,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MVVM\View\AddPostView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\CommunitiesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

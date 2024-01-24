@@ -87,9 +87,11 @@ namespace Agora
             seeder.ClearDB();
             seeder.Seed();
 
-            LoggedUser = dbContext.Users.Where(u => u.Username == "deleted").First();
+            LoggedUser = dbContext.Users.Where(u => u.Username == "johndoe").First();
 
             var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
+            mainWindow.CurrentPage = "CommunitiesView.xaml";
+
             mainWindow.Show();
             base.OnStartup(e);
         }
@@ -108,20 +110,6 @@ namespace Agora
             loginView.Show();
         }
 
-        //public static void Logout()
-        //{
-        //    LoggedUser = dbContext.Users.Where(u => u.Username == "deleted").First();
-        //}
-
-        //private static void OnUserLogout(EventArgs e)
-        //{
-        //    UserLogoutEvent?.Invoke(null, e);
-        //}
-
-        //private static void OnUserLogin(EventArgs e)
-        //{
-        //    UserLoginEvent?.Invoke(null, e);
-        //}
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(instance, new PropertyChangedEventArgs(propertyName));

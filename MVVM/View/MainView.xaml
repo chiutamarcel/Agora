@@ -87,7 +87,7 @@
 				HorizontalAlignment="Stretch"
 				VerticalAlignment="Stretch"
 				Background="Transparent"
-				Click="addPostBtn_Click"
+				Click="CommunitiesBtn_Click"
 				Style="{StaticResource MaterialDesignIconButton}">
 				<Image
 					Margin="10"

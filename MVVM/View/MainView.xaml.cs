@@ -186,5 +186,10 @@ namespace Agora
         {
             trySearch();
         }
+
+        private void CommunitiesBtn_Click(object sender, RoutedEventArgs e)
+        {
+            CurrentPage = "CommunitiesView.xaml";
+        }
     }
 }
