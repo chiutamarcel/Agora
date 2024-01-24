@@ -33,15 +33,23 @@ namespace Agora
         {
             community = DataContext as Community;
 
-            if (community.Users.Contains(App.LoggedUser))
+            if (community.User == App.LoggedUser)
+            {
+                joinBtn.Visibility = Visibility.Hidden;
+                leaveBtn.Visibility = Visibility.Hidden;
+                deleteBtn.Visibility = Visibility.Visible;
+            }
+            else if (community.Users.Contains(App.LoggedUser))
             {
                 joinBtn.Visibility = Visibility.Hidden;
                 leaveBtn.Visibility = Visibility.Visible;
+                deleteBtn.Visibility = Visibility.Hidden;
             }
             else
             {
                 joinBtn.Visibility = Visibility.Visible;
                 leaveBtn.Visibility = Visibility.Hidden;
+                deleteBtn.Visibility = Visibility.Hidden;
             }
         }
 
@@ -50,11 +58,7 @@ namespace Agora
             App.LoggedUser.CommunitiesMember.Remove(community);
             App.dbContext.SaveChanges();
 
-            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-            if (! (mainWindow is null) )
-            {
-                mainWindow.MainContentFrame.NavigationService.Refresh();
-            }
+            App.RefreshCurrentPage();
         }
 
         private void joinBtn_Click(object sender, RoutedEventArgs e)
@@ -62,11 +66,15 @@ namespace Agora
             App.LoggedUser.CommunitiesMember.Add(community);
             App.dbContext.SaveChanges();
 
-            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-            if (!(mainWindow is null))
-            {
-                mainWindow.MainContentFrame.NavigationService.Refresh();
-            }
+            App.RefreshCurrentPage();
+        }
+
+        private void deleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            App.dbContext.Communities.Remove(community);
+            App.dbContext.SaveChanges();
+
+            App.RefreshCurrentPage();
         }
     }
 }

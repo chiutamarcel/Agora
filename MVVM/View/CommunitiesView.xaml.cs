@@ -33,11 +33,15 @@ namespace Agora.MVVM.View
 
                 if (toggleMyCommunities == true)
                 {
-                    CommunitiesItemsControl.ItemsSource = App.LoggedUser.CommunitiesMember.ToList();
+                    CommunitiesItemsControl.ItemsSource = (from c in App.dbContext.Communities.ToList()
+                                                           where c.User == App.LoggedUser || c.Users.Contains(App.LoggedUser) 
+                                                           select c).ToList();
                 } 
                 else
                 {
-                    CommunitiesItemsControl.ItemsSource = App.dbContext.Communities.ToList().Where(c => !(c.Users.Contains((User) App.LoggedUser)) ).ToList();
+                    CommunitiesItemsControl.ItemsSource = (from c in App.dbContext.Communities.ToList()
+                                                           where c.User != App.LoggedUser && !c.Users.Contains(App.LoggedUser)
+                                                           select c).ToList();
                 }
             }
         }
@@ -84,6 +88,8 @@ namespace Agora.MVVM.View
 
             App.dbContext.Communities.Add(newCommunity);
             App.dbContext.SaveChanges();
+
+            App.RefreshCurrentPage();
         }
     }
 }

@@ -114,5 +114,14 @@ namespace Agora
         {
             PropertyChanged?.Invoke(instance, new PropertyChangedEventArgs(propertyName));
         }
+
+        public static void RefreshCurrentPage()
+        {
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            if (!(mainWindow is null))
+            {
+                mainWindow.MainContentFrame.NavigationService.Refresh();
+            }
+        }
     }
 }
