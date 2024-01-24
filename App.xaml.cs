@@ -87,10 +87,10 @@ namespace Agora
             seeder.ClearDB();
             seeder.Seed();
 
-            LoggedUser = dbContext.Users.Where(u => u.Username == "johndoe").First();
+            LoggedUser = dbContext.Users.Where(u => u.Username == "deleted").First();
 
             var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
-            mainWindow.CurrentPage = "CommunitiesView.xaml";
+            mainWindow.CurrentPage = "MainListView.xaml";
 
             mainWindow.Show();
             base.OnStartup(e);
