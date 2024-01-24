@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -36,9 +38,23 @@ namespace Agora.MVVM.View
         public List<CommentCard> Comments
         {
             get { return _comments; }
-            set { _comments = value; commentList.ItemsSource = Comments; }
+            set 
+            {
+                _comments = value; 
+                OnPropertyChanged();
+                commentList.ItemsSource = Comments;  
+            }
         }
 
+        private void OnPropertyChanged([CallerMemberName] string caller = "")
+        {
+            if(PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(caller));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public PostView()
         {
@@ -48,10 +64,11 @@ namespace Agora.MVVM.View
 
             Comments = new List<CommentCard>();
             var comments = (from c in App.dbContext.Comments where c.PostID == ((App)Application.Current).selectedPostID select c).ToList();
-            //foreach (var comment in comments)
-            //{
-            //    Comments.Add(new CommentCard(comment.CommentText, comment.CommentDate, comment.VoteCount));
-            //}
+            foreach (var comment in comments)
+            {
+                var user = (from u in App.dbContext.Users where u.UserID == comment.AuthorID select u).First();
+                Comments.Add(new CommentCard(user.Username, comment.CommentText, 0));
+            }
             Comments.Add(new CommentCard("test", "test",  13));
             Comments.Add(new CommentCard("test2", "test2xdfcghvjbknlm;,kmnjbhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh asddddddddddda asdaaaaaaaaaaaaaasf asfffffffffffffffffffffffasf  aassadas",  2));
         }
@@ -87,13 +104,20 @@ namespace Agora.MVVM.View
             if (CommentTextBox.Text != "")
             {
                 Comment comment = new Comment();
-                CommentVote commentVote = new CommentVote();
 
                 comment.CommentText = CommentTextBox.Text;
-                comment.CommentID = App.dbContext.Comments.Count() + 1;
-                comment.AuthorID = ((App)Application.Current).userID;
+                comment.AuthorID = App.LoggedUser.UserID;
                 comment.PostID = ((App)Application.Current).selectedPostID;
                 
+                App.dbContext.Comments.Add(comment);
+
+                App.dbContext.SaveChanges();
+
+                CommentTextBox.Text = "";
+                
+                Comments.Insert(0, new CommentCard(App.LoggedUser.Username, comment.CommentText, 0));
+
+                commentList.Items.Refresh();
             }
         }
     }
