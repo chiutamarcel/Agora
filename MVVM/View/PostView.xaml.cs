@@ -30,6 +30,12 @@ namespace Agora.MVVM.View
         private string _postAuthor;
         public string PostAuthor { get; set; }
 
+        private string _postContent;
+        public string PostContent { get; set; }
+
+        private int _postVoteCount;
+
+        public int PostVoteCount { get; set; }
 
         public PostView()
         {
@@ -40,10 +46,13 @@ namespace Agora.MVVM.View
         private void InitializeFields()
         {
             Post post = (from p in App.dbContext.Posts where p.PostID == ((App)Application.Current).selectedPostID select p).First();
-            PostCommunity = post.Community.CommunityName;
-            PostAuthor = "posted by " + (from u in App.dbContext.Users where u.UserID == post.AuthorID select u).First().Username;
+            PostCommunity = "a/" + (from c in App.dbContext.Communities where c.CommunityID == post.CommunityID select c).First().CommunityName;
+            PostAuthor = "\tposted by u/" + (from u in App.dbContext.Users where u.UserID == post.AuthorID select u).First().Username;
             PostTitle = post.PostTitle;
+            PostContent = post.PostText;
+            PostVoteCount = post.VoteCount;
         }
+
     }
 
 }

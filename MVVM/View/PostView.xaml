@@ -12,16 +12,103 @@
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="4*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="5*"/>
             <RowDefinition Height="6*"/>
+
         </Grid.RowDefinitions>
 
+        <Grid
+            Grid.Row="0"
+            Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ToolBar
+                Background="Transparent"
+                Margin="0 10"
+                VerticalAlignment="Top"
+                Grid.Column="0"
+                ToolBar.OverflowMode="Never"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center"                
+                Style="{StaticResource MaterialDesignToolBar}"   
+                materialDesign:ColorZoneAssist.Mode="SecondaryMid">
+                <ToggleButton
+				    x:Name="UpVote"
+				    Width="auto"
+				    Height="auto"
+				    Background="Green"
+				    Content="{materialDesign:PackIcon Kind=ArrowUpBoldOutline, Size=25}"
+				    IsChecked="False"
+				    Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}">
+                </ToggleButton>
+                <Separator Width="2"/>
+                <TextBlock
+                    Text="{Binding PostVoteCount}"
+                    Width="35"
+                    FontSize="20"
+                    FontWeight="Normal"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"/>
+                <Separator/>
+                <ToggleButton
+                    x:Name="DownVote"
+                    Width="auto"
+                    Height="auto"
+                    Background="Red"
+                    Content="{materialDesign:PackIcon Kind=ArrowDownBoldOutline, Size=25}"
+                    IsChecked="False"
+                    Style="{StaticResource MaterialDesignFlatToggleButton}"/>
+            </ToolBar>
+            <ToolBar
+                Background="Transparent"
+                Margin="0 10"
+                VerticalAlignment="Top"
+                Grid.Column="1"
+                ToolBar.OverflowMode="Never"
+                HorizontalAlignment="Right"
+                HorizontalContentAlignment="Right"
+                Style="{StaticResource MaterialDesignToolBar}"   
+                materialDesign:ColorZoneAssist.Mode="SecondaryMid">
+                <Separator Width="2" />
+                <Button
+                    x:Name="Edit"                    
+				    Width="auto"
+				    Height="auto"
+				    Background="Transparent"                    
+				    Foreground="Black"
+                    Content="{materialDesign:PackIcon Kind=ApplicationEditOutline,Size=23}"
+				    Style="{StaticResource MaterialDesignFlatAccentButton}">
+                </Button>
+                <Separator Width="2"/>
+                <Button
+				    Width="auto"
+				    Height="auto"
+				    Background="Transparent"
+				    Foreground="Black"
+                    Content="{materialDesign:PackIcon Kind=DeleteEmptyOutline,Size=25}"
+				    Style="{StaticResource MaterialDesignFlatAccentButton}">
+                </Button>
+                <Separator Width="2"/>
+                <Button
+                    HorizontalAlignment="Right"
+                    Width="auto"
+                    Height="auto"
+                    Background="Transparent"
+                    Foreground="Black"
+                    Content="{materialDesign:PackIcon Kind=CloseOutline,Size=25}"
+                    Style="{StaticResource MaterialDesignFlatAccentButton}">
+                </Button>
+            </ToolBar>
+        </Grid>
+        
         <Grid 
             Grid.Row="1"
             Grid.Column="1">
@@ -32,88 +119,37 @@
             <TextBlock 
                 Grid.Row="0" 
                 Text="{Binding PostCommunity}" 
-                FontSize="15" 
+                FontSize="20" 
                 FontWeight="Bold" 
-                HorizontalAlignment="Center" 
-                VerticalAlignment="Center"/>
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Bottom"/>
             <TextBlock
                 Grid.Row="1"
                 Text="{Binding PostAuthor}"
-                FontSize="10"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"/>
+                FontSize="12"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"/>
         </Grid>
 
-        <TextBlock
+        <GroupBox
             Grid.Row="2"
             Grid.Column="1"
-            Text="{Binding PostTitle}"
-            FontSize="20"
+            Header="{Binding PostTitle}"
+            FontSize="25"
             FontWeight="Bold"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center"/>
+            materialDesign:ColorZoneAssist.Mode="SecondaryMid"
+            >
+            <TextBlock
+                FontWeight="Normal"
+                Text="{Binding PostContent}"
+                FontSize="15"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                TextWrapping="Wrap"            
+                />
+        </GroupBox>
+        
         
 
-        <!--<Grid
-        Grid.Row="3"
-        Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="8*"/>
-            </Grid.RowDefinitions>
-
-            --><!--add a stackpanel here that will select the comunity--><!--
-            <StackPanel 
-            x:Name="Community"
-            Grid.Row="0"
-            Orientation="Horizontal"
-            Margin="2">
-                <TextBlock 
-                FontSize="16"
-                Text="Choose a comunity: "
-                VerticalAlignment="Center"
-                />
-                <ComboBox                     
-                ItemsSource="{Binding Communities}"
-                SelectedItem="{Binding SelectedCommunity, Mode=TwoWay}" 
-                />
-            </StackPanel>
-
-            <TextBox 
-            x:Name="PostTitle"
-            FontSize="12"    
-            TextWrapping="NoWrap"
-            AcceptsReturn="False"
-            MinLines="1"
-            MaxLines="1"
-            AcceptsTab="False"
-            SpellCheck.IsEnabled="True"
-            Style="{StaticResource MaterialDesignTextBox}"
-            Margin="10"
-            Grid.Row="1"
-            Text="{Binding PostTitle, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            materialDesign:HintAssist.Hint="Title"
-            materialDesign:HintAssist.IsFloating="True"
-            materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource PrimaryHueMidBrush}"
-            />
-
-            <TextBox            
-            x:Name="PostContent"                
-            TextWrapping="Wrap"
-            AcceptsReturn="True"
-            AcceptsTab="True"
-            SpellCheck.IsEnabled="True"
-            Style="{StaticResource MaterialDesignTextBox}"
-            Margin="10"
-            Grid.Row="2"
-            Text="{Binding PostContent, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            materialDesign:HintAssist.Hint="Content"
-            materialDesign:HintAssist.IsFloating="True"                
-            materialDesign:TextFieldAssist.HasOutlinedTextField="True"
-            />
-        </Grid>-->
-
-        
     </Grid>
 </Page>
