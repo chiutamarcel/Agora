@@ -67,7 +67,7 @@ namespace Agora.MVVM.View
             foreach (var comment in comments)
             {
                 var user = (from u in App.dbContext.Users where u.UserID == comment.AuthorID select u).First();
-                Comments.Add(new CommentCard(user.Username, comment.CommentText, 0));
+                Comments.Add(new CommentCard(comment.CommentID, user.Username, comment.CommentText, 0));
             }
          }
         private void InitializeFields()
@@ -145,7 +145,10 @@ namespace Agora.MVVM.View
                 App.dbContext.SaveChanges();
                 CommentTextBox.Text = "";
                 
-                Comments.Insert(0, new CommentCard(App.LoggedUser.Username, comment.CommentText, 0));
+                int id = (from c in App.dbContext.Comments where c.CommentText == comment.CommentText select c.CommentID).First();
+                Comments.Insert(0, new CommentCard(id, App.LoggedUser.Username, comment.CommentText, 0));
+
+                
                 commentList.Items.Refresh();
             }
         }

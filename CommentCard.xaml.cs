@@ -31,17 +31,53 @@ namespace Agora
 
         public int VoteCount { get; set; }
 
-        public CommentCard(string autor, string text, int voteCount)
+        private int _commentID;
+
+        public int CommentID { get; set; }
+
+        public CommentCard(int commentId, string autor, string text, int voteCount)
         {
             InitializeComponent();
             DataContext = this;
             AuthorName = "by u/" + autor;
             CommentText = text;
             VoteCount = voteCount;
+            CommentID = commentId;
         }
+
         public CommentCard()
         {
             InitializeComponent();
+        }
+
+        private void CommentDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if(App.IsLoggedIn() == true)
+            {
+                Comment comment = App.dbContext.Comments.Where(c => c.CommentID == CommentID).First();
+                User user = App.dbContext.Users.Where(u => u.UserID == App.LoggedUser.UserID).First();
+                if (comment.AuthorID == user.UserID)
+                {
+                    App.dbContext.Comments.Remove(comment);
+                    App.dbContext.SaveChanges();
+                    MessageBox.Show("Comment deleted.");
+                    MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+                    mainWindow.MainContentFrame.Refresh();
+                }
+                else
+                {
+                    MessageBox.Show("You can only delete your own comments.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("You must be logged in to delete a comment.");
+            }
+        }
+
+        private void CommentEdit_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

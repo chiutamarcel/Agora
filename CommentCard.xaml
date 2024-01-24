@@ -93,24 +93,27 @@
 		            ToolTip="DownVote" />
 
                 <Button
-                    x:Name="Edit"
+                    x:Name="CommentEdit"
 		            Grid.Column="5"
 		            Width="auto"
 		            Height="auto"
 		            materialDesign:ElevationAssist.Elevation="Dp0"
 		            Background="Transparent"
 		            Foreground="Black"
+                    Click="CommentEdit_Click"
                     Content="{materialDesign:PackIcon Kind=ApplicationEditOutline,Size=20}"
 		            Style="{StaticResource MaterialDesignFlatButton}">
                 </Button>
 
                 <Button
+                    x:Name="CommentDelete"
 		            Grid.Column="6"
 		            Width="auto"
 		            Height="auto"
 		            materialDesign:ElevationAssist.Elevation="Dp0"
 		            Background="Transparent"
 		            Foreground="Black"
+                    Click="CommentDelete_Click"
                     Content="{materialDesign:PackIcon Kind=DeleteEmptyOutline,Size=21}"
 		            Style="{StaticResource MaterialDesignFlatButton}">
                 </Button>
