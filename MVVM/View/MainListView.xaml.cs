@@ -31,7 +31,7 @@ namespace Agora.MVVM.View
         NEW,
     }
 
-    public partial class MainListView : Page
+    public partial class MainListView : Page, INotifyPropertyChanged
     {
         private PostsRepository postsRepository;
         List<MainListVM> _posts;

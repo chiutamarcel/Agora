@@ -97,6 +97,13 @@ namespace Agora
             MainContentFrame.DataContext = this;
             UserButton.DataContext = App.LoggedUser;
             App.Instance.PropertyChanged += OnUserChange;
+
+            MainContentFrame.Navigated += frame_Navigated;
+        }
+
+        void frame_Navigated(object sender, NavigationEventArgs e)
+        {
+            MainContentFrame.NavigationService.RemoveBackEntry();
         }
 
         ~MainWindow()
@@ -109,6 +116,8 @@ namespace Agora
         private void logoBtn_Click(object sender, RoutedEventArgs e)
         {
             CurrentPage = "MainListView.xaml";
+
+            MainContentFrame.Content = new MainListView();
         }
 
         private void userBtn_Click(object sender, RoutedEventArgs e)
