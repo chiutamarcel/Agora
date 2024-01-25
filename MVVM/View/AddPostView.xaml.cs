@@ -104,7 +104,9 @@ namespace Agora.MVVM.View
 
         private void InitializeCommunities()
         {
-            var communities = App.LoggedUser.CommunitiesMember.ToList();
+            var communities = (from c in App.dbContext.Communities.ToList()
+                               where c.User == App.LoggedUser || c.Users.Contains(App.LoggedUser)
+                               select c).ToList();
 
             Communities = new ObservableCollection<string>();
             
