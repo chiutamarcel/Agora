@@ -21,8 +21,8 @@ namespace Agora
         }
     
         public int CommentID { get; set; }
-        public int PostID { get; set; }
-        public int AuthorID { get; set; }
+        public Nullable<int> PostID { get; set; }
+        public Nullable<int> AuthorID { get; set; }
         public string CommentText { get; set; }
     
         public virtual User User { get; set; }

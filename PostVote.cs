@@ -15,8 +15,8 @@ namespace Agora
     public partial class PostVote
     {
         public int VoteID { get; set; }
-        public int PostID { get; set; }
-        public int UserID { get; set; }
+        public Nullable<int> PostID { get; set; }
+        public Nullable<int> UserID { get; set; }
         public int VoteValue { get; set; }
     
         public virtual Post Post { get; set; }
