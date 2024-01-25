@@ -15,7 +15,7 @@ namespace Agora.MVVM.Repository
 
         public List<MainListVM> GetPostsList()
         {
-            List<MainListVM> posts = App.dbContext.MainListTVs.ToList().Select(mltv => new MainListVM 
+            List<MainListVM> posts = App.dbContext.MainListTVs.AsNoTracking().ToList().Select(mltv => new MainListVM 
             {
                 PostID = mltv.PostID,
                 Title = mltv.PostTitle,
